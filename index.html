@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Yuri Cardoso</title>
+    
+    <!-- Importação do arquivo de estilos principal do projeto -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Importação da biblioteca de ícones Boxicons para uso em botões e redes sociais -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Cabeçalho fixo contendo a logotipo e a navegação principal -->
+    <header class="header">
+        <a href="#home" class="logo">
+            Yuri <span>Cardoso</span>
+        </a>
+        
+        <!-- Ícone do menu hambúrguer visível apenas em dispositivos móveis -->
+        <i class="bx bx-menu" id="menu-icon" aria-label="Abrir menu" role="button" tabindex="0"></i>
+        
+        <!-- Navegação com âncoras para as seções da página (Scroll Spy aplicado via JS) -->
+        <nav class="navbar">
+            <a href="#home" class="active">Início</a>
+            <a href="#sobre">Sobre Mim</a>
+            <a href="#projetos">Projetos</a>
+            <a href="#contatos">Contatos</a>
+        </nav>
+    </header>
+
+    <!-- Seção inicial (Hero) apresentando o desenvolvedor e resumo de habilidades -->
+    <section class="home" id="home">
+        <div class="home-content">
+            <h1>Olá, eu sou <span>Yuri Cardoso</span></h1>
+            <h3>Entusiasta de Desenvolvimento e Tecnologia</h3>
+            <p>
+                Sou um estudante de Sistemas e Mídias Digitais, interessado na área de desenvolvimento, à procura de
+                oportunidades para criar experiências digitais práticas e funcionais. Com habilidades, principalmente,
+                mas não limitadas a HTML, CSS e JavaScript, busco constantemente aprimorar meus conhecimentos e explorar
+                novas tecnologias para desenvolver soluções inovadoras.
+            </p>
+            <a href="#contatos" class="btn">Entre em Contato</a>
+        </div>
+        
+        <!-- Links de acesso rápido às plataformas profissionais -->
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/yuri-da-silva-cardoso-515886215/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="bx bxl-linkedin"></i>
+            </a>
+            <a href="https://github.com/YuriCardosoSMD?tab=repositories" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="bx bxl-github"></i>
+            </a>
+            <a href="mailto:yu.cardoso10@gmail.com" aria-label="E-mail">
+                <i class="bx bx-envelope"></i>
+            </a>
+            <a href="https://wa.me/5585996855241" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="bx bxl-whatsapp"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Seção descritiva com foto e informações adicionais sobre a trajetória do desenvolvedor -->
+    <section class="sobre" id="sobre">
+        <div class="sobre-content">
+            <h2 class="heading">Sobre <span>Mim</span></h2>
+            <h3><span>Estudante e </span>Entusiasta</h3>
+            <p>
+                Sou estudante de Sistemas e Mídias Digitais na Universidade Federal do Ceará (UFC) e desenvolvedor web
+                em formação. Possuo experiência em projetos acadêmicos, atuando tanto no Front-end (HTML, CSS,
+                JavaScript) quanto no Back-end, sendo minha área de maior interesse, com Node.js, MySQL e Firebase. Além do
+                código, tenho noções de Design para web e valorizo a documentação clara de projetos. Sou um entusiasta
+                de tecnologia, com facilidade para trabalho em equipe (utilizando Git/GitHub) e conhecimentos em
+                ambientes Linux e Redes de Computadores.
+            </p>
+            <a href="#" class="btn">Leia Mais</a>
+        </div>
+        <div class="sobre-img">
+            <!-- Imagem do perfil do desenvolvedor. Acessibilidade mantida através do atributo 'alt' -->
+            <img src="assets/foto.jpeg" alt="Foto de Yuri Cardoso">
+        </div>
+    </section>
+
+    <!-- Seção de exibição de projetos, utilizando grid layout para os cards -->
+    <section class="projetos" id="projetos">
+        <h2 class="heading">Projetos</h2>
+        <div class="projetos-container">
+            
+            <!-- Card simples de texto -->
+            <div class="projetos-box">
+                <div class="projetos-info">
+                    <h4>Design de Sites</h4>
+                    <p>Criação de interfaces modernas, organizadas e responsivas para aplicações web.</p>
+                </div>
+            </div>
+
+            <!-- Card com imagem e link para repositório do GitHub -->
+            <div class="projetos-box projeto-imagem-box">
+                <a href="https://github.com/Equipe-Simplificando/sistema-de-estoque.git" target="_blank" rel="noopener noreferrer" class="projeto-imagem-link" aria-label="Abrir projeto Sistema de Estoque no GitHub">
+                    <img src="assets/projeto-estoque.png" alt="Tela do projeto Sistema de Estoque" class="projeto-imagem">
+                    <span class="projeto-imagem-overlay">Ver projeto no GitHub</span>
+                </a>
+            </div>
+
+            <div class="projetos-box">
+                <div class="projetos-info">
+                    <h4>Design Gráfico</h4>
+                    <p>Desenvolvimento de elementos visuais, layouts e materiais para projetos digitais.</p>
+                </div>
+            </div>
+
+            <div class="projetos-box">
+                <div class="projetos-info">
+                    <h4>Documentação</h4>
+                    <p>Organização e criação de documentação para facilitar o entendimento e a manutenção de projetos.</p>
+                </div>
+            </div>
+
+            <!-- Segundo card com imagem -->
+            <div class="projetos-box projeto-imagem-box">
+                <a href="https://github.com/YuriCardosoSMD/DIGinterfacecompleta.git" target="_blank" rel="noopener noreferrer" class="projeto-imagem-link" aria-label="Abrir projeto Mandacaru Games no GitHub">
+                    <img src="assets/projeto-mandacaru.png" alt="Tela do projeto Mandacaru Games" class="projeto-imagem">
+                    <span class="projeto-imagem-overlay">Ver projeto no GitHub</span>
+                </a>
+            </div>
+
+            <div class="projetos-box">
+                <div class="projetos-info">
+                    <h4>Desenvolvimento Web</h4>
+                    <p>Desenvolvimento de aplicações web utilizando tecnologias modernas de front-end e back-end.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário de contato integrado com o Formspree para envios reais de e-mail -->
+    <section class="contato" id="contatos">
+        <h2 class="heading">Entre em <span>Contato</span></h2>
+        <form id="contact-form" action="https://formspree.io/f/mgavkvke" method="POST">
+            <div class="input-box">
+                <div class="input-group">
+                    <input type="text" name="nome" placeholder="Nome Completo" required maxlength="80" data-fs-field>
+                    <span data-fs-error="nome"></span>
+                </div>
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="E-mail" required maxlength="254" data-fs-field>
+                    <span data-fs-error="email"></span>
+                </div>
+            </div>
+            
+            <div class="input-box">
+                <div class="input-group">
+                    <!-- Campo de telefone com filtro de apenas números controlado pelo JS -->
+                    <input type="tel" name="telefone" id="telefone" placeholder="Telefone" required maxlength="20" pattern="[0-9]+" inputmode="numeric" data-fs-field>
+                    <span data-fs-error="telefone"></span>
+                </div>
+                <div class="input-group">
+                    <input type="text" name="assunto" placeholder="Assunto" required maxlength="120" data-fs-field>
+                    <span data-fs-error="assunto"></span>
+                </div>
+            </div>
+            
+            <textarea name="mensagem" id="mensagem" cols="30" rows="10" placeholder="Sua Mensagem" required maxlength="1500" data-fs-field></textarea>
+            <span data-fs-error="mensagem"></span>
+            
+            <input type="submit" value="Enviar Mensagem" class="btn" id="submit-btn" data-fs-submit-btn>
+            
+            <!-- Containers para exibir mensagens de status (sucesso/erro) da API do Formspree -->
+            <div data-fs-success class="form-success"></div>
+            <div data-fs-error class="form-error"></div>
+        </form>
+    </section>
+
+    <!-- Rodapé contendo links de navegação redundantes e direitos autorais -->
+    <footer class="footer">
+        <div class="social">
+            <a href="https://www.linkedin.com/in/yuri-da-silva-cardoso-515886215/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="bx bxl-linkedin"></i>
+            </a>
+            <a href="https://github.com/YuriCardosoSMD?tab=repositories" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="bx bxl-github"></i>
+            </a>
+            <a href="mailto:yu.cardoso10@gmail.com" aria-label="E-mail">
+                <i class="bx bx-envelope"></i>
+            </a>
+            <a href="https://wa.me/5585996855241" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="bx bxl-whatsapp"></i>
+            </a>
+        </div>
+        
+        <ul class="list footer-main-list">
+            <li><a href="#home">Início</a></li>
+            <li><a href="#sobre">Sobre Mim</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#contatos">Contato</a></li>
+        </ul>
+        
+        <ul class="list footer-secondary-list">
+            <li><a href="#">Perguntas Frequentes</a></li>
+            <li><a href="#">Política de Privacidade</a></li>
+        </ul>
+        
+        <p class="copyright">&copy; Yuri Cardoso | Todos os Direitos Reservados</p>
+    </footer>
+
+    <!-- Bibliotecas externas e lógicas customizadas do projeto -->
+    <!-- Script base do Formspree carregado de forma assíncrona (defer) -->
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+    
+    <!-- Script principal onde a interatividade e a configuração do Formspree ocorrem -->
+    <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1033 @@
+/* ==========================================================================
+   1. RESET GLOBAL DE ESTILOS
+   Garante que o comportamento base seja igual em todos os navegadores.
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ==========================================================================
+   2. VARIÁVEIS DE CORES
+   Centraliza o tema do site. Alterar a cor aqui muda em todo o projeto.
+   ========================================================================== */
+:root {
+    --bg-color: #F8F7FC;          /* Fundo principal claro */
+    --secondary-bg-color: #8B5CF6; /* Fundo secundário (Roxo intermediário) */
+    --text-color: #1F1B2D;        /* Cor do texto escuro (quase preto) */
+    --main-color: #6D28D9;        /* Cor principal de destaque (Roxo escuro) */
+    --white-color: #FFFFFF;       /* Branco puro para contrastes */
+}
+
+/* ==========================================================================
+   3. CONFIGURAÇÕES BASE (HTML e BODY)
+   ========================================================================== */
+html {
+    /* Define base 10px para uso de rem (1rem = 10px) facilitando os cálculos responsivos */
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   4. HEADER E NAVEGAÇÃO PRINCIPAL (NAVBAR)
+   ========================================================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 3rem 9%;
+    /* Fundo semi-transparente simulando vidro (Glassmorphism) */
+    background: rgba(248, 247, 252, 0.75);
+    border-bottom: 1px solid rgba(109, 40, 217, 0.15);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+/* Marca pessoal (Logo em formato de texto) */
+.logo {
+    font-size: 3rem;
+    color: var(--text-color);
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo span {
+    color: var(--main-color);
+}
+
+/* Links do menu no modo Desktop */
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.navbar a {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-left: 4rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+    border-bottom: 0.15rem solid transparent;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+    border-bottom: 0.3rem solid var(--main-color);
+}
+
+/* Ícone de Menu Hambúrguer (inativo no Desktop, ativado nas Media Queries) */
+#menu-icon {
+    font-size: 3.6rem;
+    color: var(--text-color);
+    display: none;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   5. ESTRUTURA GERAL DAS SEÇÕES (SECTION)
+   ========================================================================== */
+section {
+    min-height: 100vh; /* Garante que a seção ocupe pelo menos 100% da tela visível */
+    padding: 10rem 9% 10rem;
+}
+
+/* Componente Global: Título de Seções (Ex: "Projetos", "Sobre Mim") */
+.heading {
+    text-align: center;
+    font-size: 8rem;
+}
+
+/* Componente Global: Botão Primário */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background: var(--main-color);
+    color: var(--white-color);
+    border-radius: 4rem;
+    border: 2px solid transparent;
+    font-size: 1.6rem;
+    letter-spacing: 0.1rem;
+    font-weight: 600;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background: var(--bg-color);
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+}
+
+/* ==========================================================================
+   6. SEÇÃO HERO (HOME)
+   ========================================================================== */
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.home-content h1 {
+    font-size: 8rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.home-content h1 span {
+    color: var(--main-color);
+}
+
+.home-content h3 {
+    font-size: 4rem;
+    margin: 10px 0;
+}
+
+.home-content p {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    font-weight: 500;
+    max-width: 1000px;
+}
+
+/* Estilo para imagem de perfil arredondada, com efeitos hover */
+.home-img {
+    border-radius: 50%;
+}
+
+.home-img img {
+    position: relative;
+    top: 2rem;
+    width: 20vw;
+    border-radius: 50%;
+    border: 10px solid transparent;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+
+.home-img img:hover {
+    border: 10px solid var(--main-color);
+    transform: scale(1.05);
+}
+
+/* Containers das redes sociais na introdução */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    background: transparent;
+    border: 0.3rem solid var(--text-color);
+    font-size: 3rem;
+    border-radius: 50%;
+    color: var(--main-color);
+    margin: 3rem 1.5rem 3rem 0;
+    transition: 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+    color: var(--white-color);
+    background: var(--main-color);
+    transform: scale(1.3) translateY(-5px);
+}
+
+/* ==========================================================================
+   7. SEÇÃO SOBRE
+   ========================================================================== */
+.sobre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10rem;
+    background: var(--secondary-bg-color);
+    color: var(--white-color);
+}
+
+.sobre-content {
+    max-width: 700px;
+}
+
+.sobre-content h2 {
+    text-align: left;
+    line-height: 1.5;
+}
+
+.sobre-content h2 span {
+    color: var(--main-color);
+}
+
+.sobre-content h3 {
+    font-size: 2.6rem;
+}
+
+.sobre-content h3 span {
+    color: var(--white-color);
+}
+
+.sobre-content p {
+    font-size: 1.6rem;
+    margin: 2rem 0 3rem;
+    line-height: 1.8;
+}
+
+.sobre-img {
+    border-radius: 25%;
+}
+
+.sobre-img img {
+    position: relative;
+    width: 25vw;
+    border-radius: 25%;
+    border: 10px solid transparent;
+    top: 1rem;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+
+.sobre-img img:hover {
+    border: 5px solid var(--white-color);
+    transform: scale(1.05);
+}
+
+/* Estilo modificado do botão para a seção Sobre, combinando com o tema escuro */
+.sobre-content .btn {
+    background: var(--white-color);
+    color: var(--main-color);
+    border: 3px solid var(--main-color);
+}
+
+.sobre-content .btn:hover {
+    background-color: transparent;
+    color: var(--white-color);
+    border: 3px solid var(--white-color);
+}
+
+/* ==========================================================================
+   8. ESTILIZAÇÃO DA BARRA DE ROLAGEM (SCROLLBAR CUSTOMIZADO)
+   ========================================================================== */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--bg-color);
+}
+
+/* ==========================================================================
+   9. SEÇÃO DE PROJETOS E SEUS CARDS (GRID)
+   ========================================================================== */
+.projetos {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.projetos h2 {
+    margin-bottom: 5rem;
+    color: var(--text-color);
+}
+
+/* Estruturação de colunas para as listagens de projetos */
+.projetos-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Estilização individual de cada Card de projeto */
+.projetos-box {
+    border: 3px solid var(--main-color);
+    height: 300px;
+    border-radius: 1em;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.3s ease-in-out;
+}
+
+.projetos-box:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+    transform: scale(1.03);
+}
+
+/* Configuração interna dos textos dos Cards */
+.projetos-box .projetos-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    align-items: baseline;
+    height: 100%;
+    padding: 5em;
+}
+
+.projetos-info h4 {
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.projetos-info p {
+    margin: 2rem 0 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/* Blocos específicos de projetos que contém imagens */
+.projeto-imagem-box {
+    padding: 0;
+    position: relative;
+    background: var(--bg-color);
+}
+
+.projeto-imagem-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Imagem cobrindo o card uniformemente (object-fit) */
+.projeto-imagem {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+/* Overlay que aparece ao passar o mouse por cima do projeto com imagem */
+.projeto-imagem-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: rgba(109, 40, 217, 0.78);
+    color: var(--white-color);
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Animações combinadas ao passar o mouse por cima da imagem */
+.projeto-imagem-link:hover .projeto-imagem {
+    transform: scale(1.08);
+    filter: brightness(0.75);
+}
+
+.projeto-imagem-link:hover .projeto-imagem-overlay {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   10. SEÇÃO DE CONTATO (FORMULÁRIOS)
+   ========================================================================== */
+.contato {
+    background: var(--secondary-bg-color);
+    color: var(--white-color);
+}
+
+.contato h2 span {
+    color: var(--main-color);
+}
+
+.contato h2 {
+    margin-bottom: 3rem;
+}
+
+/* Layout centralizado para o Formulário */
+.contato form {
+    max-width: 70rem;
+    margin: 1rem auto 3rem;
+    text-align: center;
+}
+
+/* Disposição lateral de grupos de input no formato Desktop */
+.contato form .input-box {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.contato form .input-box .input-group {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+}
+
+/* Base gráfica padronizada dos campos de input e text area */
+.contato form .input-box input,
+.contato form textarea {
+    padding: 2rem;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    background: var(--bg-color);
+    border-radius: 2rem;
+    border: 2px solid var(--main-color);
+    margin: 0;
+    resize: none;
+    width: 100%;
+}
+
+.contato form textarea {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+/* -------------------------------------------------------------
+   ALERTAS VISUAIS DO SERVIÇO FORMSPREE
+------------------------------------------------------------- */
+.contato form [data-fs-error] {
+    display: block;
+    color: #FFB4B4;
+    font-size: 1.4rem;
+    text-align: left;
+    margin-top: 0.5rem;
+    min-height: 0;
+    font-weight: 500;
+}
+
+.contato form [data-fs-error]:empty {
+    display: none;
+}
+
+/* Caixa de sucesso personalizada */
+.form-success {
+    display: none;
+    color: #D1FAE5;
+    background: rgba(16, 185, 129, 0.25);
+    border: 2px solid #10B981;
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.form-success:not(:empty) {
+    display: block;
+}
+
+/* Caixa de erro personalizada */
+.form-error {
+    display: none;
+    color: #FEE2E2;
+    background: rgba(239, 68, 68, 0.25);
+    border: 2px solid #EF4444;
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.form-error:not(:empty) {
+    display: block;
+}
+
+/* Bloquear visualmente o botão durante o processamento do formulário */
+#submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ==========================================================================
+   11. RODAPÉ (FOOTER)
+   ========================================================================== */
+.footer {
+    width: 100%;
+    padding: 40px 20px;
+    background-color: var(--white-color);
+    text-align: center;
+}
+
+.footer .social {
+    padding-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer .social a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    font-size: 25px;
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+.footer .social a:hover {
+    transform: scale(1.2) translateY(-10px);
+    background-color: var(--main-color);
+    color: var(--white-color);
+}
+
+.footer .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.footer .list li {
+    text-align: center;
+}
+
+.footer .list li a {
+    color: var(--text-color);
+    border-bottom: 3px solid transparent;
+    transition: 0.3s ease;
+}
+
+.footer .list li a:hover {
+    color: var(--main-color);
+    border-bottom: 3px solid var(--main-color);
+}
+
+/* Flex layout para separar adequadamente os links do rodapé em 2 linhas */
+.footer-main-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin-bottom: 1.5rem !important;
+}
+
+.footer-secondary-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+}
+
+.footer .copyright {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+/* ==========================================================================
+   12. RESPONSIVIDADE (MEDIA QUERIES)
+   Adapta o layout para diferentes tamanhos de tela e dispositivos.
+   ========================================================================== */
+
+/* TELAS INTERMEDIÁRIAS (Notebooks e Tablets de Alta Resolução) */
+@media (max-width: 1285px) {
+    html {
+        font-size: 55%;
+    }
+    .projetos-container {
+        padding-bottom: 7rem;
+        /* Reduz os projetos para 2 por fileira */
+        grid-template-columns: repeat(2, 1fr);
+        margin: 0 5rem;
+    }
+    .home-img img {
+        width: 32vw;
+    }
+}
+
+/* TABLETS PADRÃO E TELAS PEQUENAS (991px ou inferior) */
+@media (max-width: 991px) {
+    .header {
+        padding: 2rem 5%;
+    }
+    section {
+        padding: 10rem 5% 5rem;
+    }
+    .projetos {
+        padding-bottom: 7rem;
+    }
+    .footer {
+        padding: 30px 20px;
+    }
+}
+
+/* CELULARES (Layout Colunar e Menu Mobile) - 895px ou inferior */
+@media (max-width: 895px) {
+    /* Exibe o Ícone do Menu Hambúrguer e esconde links padão */
+    #menu-icon {
+        display: block;
+        font-size: 3.6rem;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 1rem 5% 2rem;
+        background: rgba(255, 255, 255, 0.98);
+        border-top: 2px solid var(--main-color);
+        border-bottom: 3px solid var(--main-color);
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        box-shadow: 0 10px 25px rgba(31, 27, 45, 0.12);
+    }
+    
+    .navbar.active {
+        display: flex; /* Acionado via JavaScript ao clicar no Hambúrguer */
+    }
+    
+    .navbar a {
+        display: block;
+        font-size: 2rem;
+        margin: 0;
+        padding: 1.5rem;
+        color: var(--text-color);
+        text-align: center;
+        border-bottom: none;
+    }
+    
+    .navbar a:hover,
+    .navbar a.active {
+        color: var(--main-color);
+        border-bottom: none;
+    }
+    
+    .home {
+        flex-direction: column;
+        margin: 0;
+        padding: 12rem 5% 6rem;
+    }
+    
+    .home-content {
+        width: 100%;
+        margin-top: 0;
+    }
+    
+    .home-content h1 {
+        font-size: 5rem;
+        line-height: 1.1;
+    }
+    
+    .home-content h3 {
+        font-size: 2.6rem;
+        margin: 1.5rem 0;
+    }
+    
+    .home-content p {
+        font-size: 1.6rem;
+        line-height: 1.7;
+    }
+    
+    .social-icons {
+        flex-wrap: wrap;
+    }
+    
+    .social-icons a {
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 2.5rem;
+        margin: 2rem 0.7rem;
+    }
+    
+    .sobre {
+        flex-direction: column-reverse;
+        gap: 4rem;
+        text-align: center;
+        padding: 8rem 5%;
+    }
+    
+    .sobre-content {
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .sobre-content h2 {
+        text-align: center;
+    }
+    
+    .sobre-content h3 {
+        font-size: 2.4rem;
+    }
+    
+    .sobre-content p {
+        font-size: 1.6rem;
+    }
+    
+    .sobre-img img {
+        width: 60vw;
+        max-width: 280px;
+        margin: 0;
+    }
+    
+    .heading {
+        font-size: 5rem;
+    }
+    
+    /* Configuração de cards de projeto em lista única nos celulares */
+    .projetos {
+        padding: 8rem 5%;
+    }
+    
+    .projetos h2 {
+        margin-bottom: 3rem;
+    }
+    
+    .projetos-container {
+        grid-template-columns: 1fr;
+        margin: 0;
+        gap: 2rem;
+    }
+    
+    .projetos-box {
+        height: auto;
+        min-height: 250px;
+    }
+    
+    .projetos-box .projetos-info {
+        padding: 3rem;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .projetos-info h4 {
+        font-size: 2.8rem;
+    }
+    
+    .projetos-info p {
+        font-size: 1.6rem;
+    }
+    
+    .projeto-imagem-box {
+        height: 250px;
+        min-height: 250px;
+    }
+    
+    .contato {
+        padding: 8rem 5%;
+    }
+    
+    .contato form {
+        width: 100%;
+    }
+    
+    .contato form .input-box {
+        flex-direction: column;
+    }
+    
+    .contato form .input-box .input-group {
+        width: 100%;
+    }
+    
+    .contato form textarea {
+        width: 100%;
+        min-height: 180px;
+    }
+    
+    .footer {
+        padding: 35px 15px;
+    }
+    
+    .footer .social {
+        gap: 15px;
+        padding-bottom: 25px;
+    }
+    
+    .footer .social a {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+    
+    .footer-main-list {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        justify-content: center;
+        gap: 1.5rem 2.5rem;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .footer-secondary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .footer .copyright {
+        margin-top: 35px;
+        font-size: 1.4rem;
+    }
+}
+
+/* SMARTPHONES COM TELAS MENORES (Ex: iPhone SE / Telas de até 440px) */
+@media (max-width: 440px) {
+    html {
+        font-size: 55%;
+    }
+    
+    .header {
+        padding: 1.8rem 5%;
+        height: 75px;
+    }
+    
+    .logo {
+        font-size: 2.5rem;
+    }
+    
+    #menu-icon {
+        font-size: 3.4rem;
+    }
+    
+    .navbar {
+        width: 100%;
+        padding: 1rem 5% 1.5rem;
+    }
+    
+    .navbar a {
+        font-size: 1.9rem;
+        margin: 0;
+        padding: 1.3rem;
+    }
+    
+    .home {
+        min-height: 100vh;
+        padding: 10rem 5% 5rem;
+    }
+    
+    .home-content h1 {
+        font-size: 4.2rem;
+        line-height: 1.15;
+    }
+    
+    .home-content h3 {
+        font-size: 2.3rem;
+    }
+    
+    .home-content p {
+        font-size: 1.5rem;
+        line-height: 1.7;
+    }
+    
+    .home .btn {
+        font-size: 1.5rem;
+        padding: 1rem 2rem;
+    }
+    
+    .sobre {
+        padding: 7rem 5% 6rem;
+        gap: 3rem;
+    }
+    
+    .heading {
+        font-size: 4.2rem;
+    }
+    
+    .sobre-img img {
+        width: 65vw;
+        max-width: 250px;
+    }
+    
+    .sobre-content h3 {
+        font-size: 2.2rem;
+    }
+    
+    .sobre-content p {
+        font-size: 1.5rem;
+        line-height: 1.7;
+    }
+    
+    .projetos {
+        padding: 7rem 5% 6rem;
+    }
+    
+    .projetos-box {
+        min-height: 230px;
+    }
+    
+    .projetos-box .projetos-info {
+        padding: 2.5rem 2rem;
+    }
+    
+    .projetos-info h4 {
+        font-size: 2.5rem;
+    }
+    
+    .projetos-info p {
+        font-size: 1.5rem;
+    }
+    
+    .projeto-imagem-box {
+        height: 230px;
+        min-height: 230px;
+    }
+    
+    .contato {
+        padding: 7rem 5% 6rem;
+    }
+    
+    .contato form .input-box input,
+    .contato form textarea {
+        font-size: 1.5rem;
+        padding: 1.6rem;
+    }
+    
+    .contato form textarea {
+        min-height: 160px;
+    }
+    
+    .footer {
+        padding: 30px 10px;
+    }
+    
+    .footer .social {
+        gap: 10px;
+    }
+    
+    .footer .social a {
+        width: 38px;
+        height: 38px;
+        font-size: 21px;
+    }
+    
+    .footer-main-list {
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        column-gap: 10px;
+        row-gap: 1.2rem;
+        font-size: 1.5rem;
+    }
+    
+    .footer-secondary-list {
+        width: 100%;
+        font-size: 1.5rem;
+    }
+    
+    .footer .copyright {
+        margin-top: 30px;
+        font-size: 1.3rem;
+        line-height: 1.5;
+    }
+}
