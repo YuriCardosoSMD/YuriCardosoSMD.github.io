@@ -18,16 +18,19 @@
             Yuri <span>Cardoso</span>
         </a>
         
-        <!-- Ícone do menu hambúrguer visível apenas em dispositivos móveis -->
-        <i class="bx bx-menu" id="menu-icon" aria-label="Abrir menu" role="button" tabindex="0"></i>
-        
         <!-- Navegação com âncoras para as seções da página (Scroll Spy aplicado via JS) -->
         <nav class="navbar">
             <a href="#home" class="active">Início</a>
             <a href="#sobre">Sobre Mim</a>
             <a href="#projetos">Projetos</a>
-            <a href="#contatos">Contatos</a>
+            <a href="#linguagens">Tecnologias</a>
         </nav>
+
+        <!-- Agrupamento das ações do cabeçalho (Dark mode e Hambúrguer) -->
+        <div class="header-actions">
+            <i class='bx bx-moon' id="darkmode-toggle" aria-label="Alternar modo escuro" role="button" tabindex="0"></i>
+            <i class="bx bx-menu" id="menu-icon" aria-label="Abrir menu" role="button" tabindex="0"></i>
+        </div>
     </header>
 
     <!-- Seção inicial (Hero) apresentando o desenvolvedor e resumo de habilidades -->
@@ -41,7 +44,7 @@
                 mas não limitadas a HTML, CSS e JavaScript, busco constantemente aprimorar meus conhecimentos e explorar
                 novas tecnologias para desenvolver soluções inovadoras.
             </p>
-            <a href="#contatos" class="btn">Entre em Contato</a>
+            <a href="#projetos" class="btn">Ver Projetos</a>
         </div>
         
         <!-- Links de acesso rápido às plataformas profissionais -->
@@ -134,42 +137,30 @@
         </div>
     </section>
 
-    <!-- Formulário de contato integrado com o Formspree para envios reais de e-mail -->
-    <section class="contato" id="contatos">
-        <h2 class="heading">Entre em <span>Contato</span></h2>
-        <form id="contact-form" action="https://formspree.io/f/mgavkvke" method="POST">
-            <div class="input-box">
-                <div class="input-group">
-                    <input type="text" name="nome" placeholder="Nome Completo" required maxlength="80" data-fs-field>
-                    <span data-fs-error="nome"></span>
-                </div>
-                <div class="input-group">
-                    <input type="email" name="email" placeholder="E-mail" required maxlength="254" data-fs-field>
-                    <span data-fs-error="email"></span>
-                </div>
+    <!-- Seção de Linguagens e Tecnologias (Grades com ícones) -->
+    <section class="linguagens" id="linguagens">
+        <h2 class="heading">Linguagens e <span>Tecnologias</span></h2>
+        <div class="linguagens-container">
+            <!-- 6 cards formatados na ordem solicitada -->
+            <div class="linguagens-box" onclick="mostrarAlerta()">
+                <img src="assets/PythonIcon.png" alt="Python">
             </div>
-            
-            <div class="input-box">
-                <div class="input-group">
-                    <!-- Campo de telefone com filtro de apenas números controlado pelo JS -->
-                    <input type="tel" name="telefone" id="telefone" placeholder="Telefone" required maxlength="20" pattern="[0-9]+" inputmode="numeric" data-fs-field>
-                    <span data-fs-error="telefone"></span>
-                </div>
-                <div class="input-group">
-                    <input type="text" name="assunto" placeholder="Assunto" required maxlength="120" data-fs-field>
-                    <span data-fs-error="assunto"></span>
-                </div>
+            <div class="linguagens-box" onclick="mostrarAlerta()">
+                <img src="assets/JavaIcon.png" alt="Java">
             </div>
-            
-            <textarea name="mensagem" id="mensagem" cols="30" rows="10" placeholder="Sua Mensagem" required maxlength="1500" data-fs-field></textarea>
-            <span data-fs-error="mensagem"></span>
-            
-            <input type="submit" value="Enviar Mensagem" class="btn" id="submit-btn" data-fs-submit-btn>
-            
-            <!-- Containers para exibir mensagens de status (sucesso/erro) da API do Formspree -->
-            <div data-fs-success class="form-success"></div>
-            <div data-fs-error class="form-error"></div>
-        </form>
+            <div class="linguagens-box" onclick="mostrarAlerta()">
+                <img src="assets/JsTsIcon.png" alt="JavaScript / TypeScript">
+            </div>
+            <div class="linguagens-box" onclick="mostrarAlerta()">
+                <img src="assets/SQLIcon.png" alt="SQL">
+            </div>
+            <div class="linguagens-box" onclick="mostrarAlerta()">
+                <img src="assets/CIcon.png" alt="C">
+            </div>
+            <div class="linguagens-box" onclick="mostrarAlerta()">
+                <img src="assets/BashShellIcon.png" alt="Bash/Shell">
+            </div>
+        </div>
     </section>
 
     <!-- Rodapé contendo links de navegação redundantes e direitos autorais -->
@@ -193,7 +184,7 @@
             <li><a href="#home">Início</a></li>
             <li><a href="#sobre">Sobre Mim</a></li>
             <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#contatos">Contato</a></li>
+            <li><a href="#linguagens">Tecnologias</a></li>
         </ul>
         
         <ul class="list footer-secondary-list">
@@ -204,11 +195,7 @@
         <p class="copyright">&copy; Yuri Cardoso | Todos os Direitos Reservados</p>
     </footer>
 
-    <!-- Bibliotecas externas e lógicas customizadas do projeto -->
-    <!-- Script base do Formspree carregado de forma assíncrona (defer) -->
-    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
-    
-    <!-- Script principal onde a interatividade e a configuração do Formspree ocorrem -->
+    <!-- Script principal onde a interatividade ocorre -->
     <script src="script.js" defer></script>
 </body>
 </html>

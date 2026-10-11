@@ -14,15 +14,37 @@
 }
 
 /* ==========================================================================
-   2. VARIÁVEIS DE CORES
-   Centraliza o tema do site. Alterar a cor aqui muda em todo o projeto.
+   2. VARIÁVEIS DE CORES (Regra 70/20/10 - Escala de Cinza)
+   Centraliza o tema do site.
    ========================================================================== */
 :root {
-    --bg-color: #F8F7FC;          /* Fundo principal claro */
-    --secondary-bg-color: #8B5CF6; /* Fundo secundário (Roxo intermediário) */
-    --text-color: #1F1B2D;        /* Cor do texto escuro (quase preto) */
-    --main-color: #6D28D9;        /* Cor principal de destaque (Roxo escuro) */
-    --white-color: #FFFFFF;       /* Branco puro para contrastes */
+    --bg-color: #FFFFFF;          /* 70% Branco - Fundo principal */
+    --secondary-bg-color: #F0F0F0; /* 20% Cinza claro - Fundo secundário */
+    --text-color: #333333;        /* Cinza escuro para manter leitura suave */
+    --main-color: #000000;        /* 10% Preto - Cor de destaque (botões e detalhes) */
+    --white-color: #FFFFFF;       /* Branco puro para contrastes internos */
+    
+    /* Variáveis extras para controle de transparências no Glassmorphism */
+    --header-bg: rgba(255, 255, 255, 0.85);
+    --header-border: rgba(0, 0, 0, 0.1);
+    --mobile-nav-bg: rgba(255, 255, 255, 0.98);
+    --overlay-bg: rgba(0, 0, 0, 0.8);
+    --overlay-text: #FFFFFF;
+}
+
+/* Cores aplicadas quando o JS ativar o modo escuro */
+body.dark-mode {
+    --bg-color: #121212;          /* Fundo principal escuro */
+    --secondary-bg-color: #1a1a1a; /* Fundo secundário mais escuro */
+    --text-color: #f0f0f0;        /* Texto claro */
+    --main-color: #ffffff;        /* Detalhes e botões agora ficam brancos */
+    --white-color: #000000;       /* Texto dentro dos botões invertido para preto */
+    
+    --header-bg: rgba(18, 18, 18, 0.85);
+    --header-border: rgba(255, 255, 255, 0.1);
+    --mobile-nav-bg: rgba(18, 18, 18, 0.98);
+    --overlay-bg: rgba(255, 255, 255, 0.85);
+    --overlay-text: #000000;
 }
 
 /* ==========================================================================
@@ -49,9 +71,9 @@ body {
     left: 0;
     width: 100%;
     padding: 3rem 9%;
-    /* Fundo semi-transparente simulando vidro (Glassmorphism) */
-    background: rgba(248, 247, 252, 0.75);
-    border-bottom: 1px solid rgba(109, 40, 217, 0.15);
+    /* Fundo semi-transparente simulando vidro (Glassmorphism) adaptado para tons de cinza */
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--header-border);
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
@@ -96,6 +118,27 @@ body {
     color: var(--main-color);
     border-bottom: 0.3rem solid var(--main-color);
 }
+
+/* Contêiner de Ações do Header (Ícones) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Ícone do Modo Escuro */
+#darkmode-toggle {
+    font-size: 2.8rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#darkmode-toggle:hover {
+    transform: scale(1.1);
+    color: var(--main-color);
+}
+
 
 /* Ícone de Menu Hambúrguer (inativo no Desktop, ativado nas Media Queries) */
 #menu-icon {
@@ -234,6 +277,7 @@ section {
     transform: scale(1.3) translateY(-5px);
 }
 
+
 /* ==========================================================================
    7. SEÇÃO SOBRE
    ========================================================================== */
@@ -243,7 +287,7 @@ section {
     align-items: center;
     gap: 10rem;
     background: var(--secondary-bg-color);
-    color: var(--white-color);
+    color: var(--text-color);
 }
 
 .sobre-content {
@@ -264,7 +308,7 @@ section {
 }
 
 .sobre-content h3 span {
-    color: var(--white-color);
+    color: var(--text-color);
 }
 
 .sobre-content p {
@@ -288,21 +332,21 @@ section {
 }
 
 .sobre-img img:hover {
-    border: 5px solid var(--white-color);
+    border: 5px solid var(--main-color);
     transform: scale(1.05);
 }
 
-/* Estilo modificado do botão para a seção Sobre, combinando com o tema escuro */
+/* Estilo modificado do botão para a seção Sobre */
 .sobre-content .btn {
-    background: var(--white-color);
-    color: var(--main-color);
+    background: var(--main-color);
+    color: var(--white-color);
     border: 3px solid var(--main-color);
 }
 
 .sobre-content .btn:hover {
     background-color: transparent;
-    color: var(--white-color);
-    border: 3px solid var(--white-color);
+    color: var(--main-color);
+    border: 3px solid var(--main-color);
 }
 
 /* ==========================================================================
@@ -319,6 +363,7 @@ section {
 ::-webkit-scrollbar-track {
     background-color: var(--bg-color);
 }
+
 
 /* ==========================================================================
    9. SEÇÃO DE PROJETOS E SEUS CARDS (GRID)
@@ -379,7 +424,7 @@ section {
     font-weight: 400;
 }
 
-/* Blocos específicos de projetos que contém imagens */
+/* Blocos específicos de projetos que contêm imagens */
 .projeto-imagem-box {
     padding: 0;
     position: relative;
@@ -405,7 +450,7 @@ section {
     transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 
-/* Overlay que aparece ao passar o mouse por cima do projeto com imagem */
+/* Overlay Escuro que aparece ao passar o mouse por cima do projeto com imagem */
 .projeto-imagem-overlay {
     position: absolute;
     inset: 0;
@@ -413,8 +458,8 @@ section {
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    background: rgba(109, 40, 217, 0.78);
-    color: var(--white-color);
+    background: var(--overlay-bg);
+    color: var(--overlay-text);
     font-size: 2rem;
     font-weight: 700;
     text-align: center;
@@ -433,117 +478,55 @@ section {
 }
 
 /* ==========================================================================
-   10. SEÇÃO DE CONTATO (FORMULÁRIOS)
+   10. SEÇÃO DE LINGUAGENS E TECNOLOGIAS
    ========================================================================== */
-.contato {
+.linguagens {
     background: var(--secondary-bg-color);
-    color: var(--white-color);
+    color: var(--text-color);
 }
 
-.contato h2 span {
+.linguagens h2 span {
     color: var(--main-color);
 }
 
-.contato h2 {
-    margin-bottom: 3rem;
+.linguagens h2 {
+    margin-bottom: 5rem;
 }
 
-/* Layout centralizado para o Formulário */
-.contato form {
-    max-width: 70rem;
-    margin: 1rem auto 3rem;
-    text-align: center;
+.linguagens-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 2rem;
 }
 
-/* Disposição lateral de grupos de input no formato Desktop */
-.contato form .input-box {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.contato form .input-box .input-group {
-    width: 49%;
-    display: flex;
-    flex-direction: column;
-    margin: 0.5rem 0;
-}
-
-/* Base gráfica padronizada dos campos de input e text area */
-.contato form .input-box input,
-.contato form textarea {
-    padding: 2rem;
-    font-size: 1.6rem;
-    color: var(--text-color);
+.linguagens-box {
     background: var(--bg-color);
-    border-radius: 2rem;
-    border: 2px solid var(--main-color);
-    margin: 0;
-    resize: none;
-    width: 100%;
+    border: 3px solid var(--main-color);
+    height: 280px;
+    border-radius: 1em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+    padding: 3rem;
 }
 
-.contato form textarea {
-    width: 100%;
-    margin: 0.5rem 0;
+.linguagens-box img {
+    max-width: 150px; /* Tamanho dos ícones aumentado */
+    max-height: 150px;
+    object-fit: contain;
+    transition: transform 0.3s ease-in-out;
 }
 
-/* -------------------------------------------------------------
-   ALERTAS VISUAIS DO SERVIÇO FORMSPREE
-------------------------------------------------------------- */
-.contato form [data-fs-error] {
-    display: block;
-    color: #FFB4B4;
-    font-size: 1.4rem;
-    text-align: left;
-    margin-top: 0.5rem;
-    min-height: 0;
-    font-weight: 500;
+.linguagens-box:hover {
+    background: var(--main-color);
+    transform: scale(1.03);
 }
 
-.contato form [data-fs-error]:empty {
-    display: none;
-}
-
-/* Caixa de sucesso personalizada */
-.form-success {
-    display: none;
-    color: #D1FAE5;
-    background: rgba(16, 185, 129, 0.25);
-    border: 2px solid #10B981;
-    padding: 1.5rem;
-    border-radius: 1.2rem;
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-top: 2rem;
-}
-
-.form-success:not(:empty) {
-    display: block;
-}
-
-/* Caixa de erro personalizada */
-.form-error {
-    display: none;
-    color: #FEE2E2;
-    background: rgba(239, 68, 68, 0.25);
-    border: 2px solid #EF4444;
-    padding: 1.5rem;
-    border-radius: 1.2rem;
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-top: 2rem;
-}
-
-.form-error:not(:empty) {
-    display: block;
-}
-
-/* Bloquear visualmente o botão durante o processamento do formulário */
-#submit-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
+.linguagens-box:hover img {
+    transform: scale(1.2); /* Imagem ganha um leve zoom interno adicional */
 }
 
 /* ==========================================================================
@@ -552,7 +535,7 @@ section {
 .footer {
     width: 100%;
     padding: 40px 20px;
-    background-color: var(--white-color);
+    background-color: var(--secondary-bg-color);
     text-align: center;
 }
 
@@ -626,6 +609,7 @@ section {
     gap: 2.5rem;
 }
 
+
 .footer .copyright {
     margin-top: 50px;
     text-align: center;
@@ -633,9 +617,9 @@ section {
     color: var(--text-color);
 }
 
+
 /* ==========================================================================
    12. RESPONSIVIDADE (MEDIA QUERIES)
-   Adapta o layout para diferentes tamanhos de tela e dispositivos.
    ========================================================================== */
 
 /* TELAS INTERMEDIÁRIAS (Notebooks e Tablets de Alta Resolução) */
@@ -643,12 +627,15 @@ section {
     html {
         font-size: 55%;
     }
-    .projetos-container {
+
+    .projetos-container,
+    .linguagens-container {
         padding-bottom: 7rem;
-        /* Reduz os projetos para 2 por fileira */
+        /* Reduz os projetos e linguagens para 2 por fileira */
         grid-template-columns: repeat(2, 1fr);
         margin: 0 5rem;
     }
+
     .home-img img {
         width: 32vw;
     }
@@ -659,12 +646,16 @@ section {
     .header {
         padding: 2rem 5%;
     }
+
     section {
         padding: 10rem 5% 5rem;
     }
-    .projetos {
+
+    .projetos,
+    .linguagens {
         padding-bottom: 7rem;
     }
+
     .footer {
         padding: 30px 20px;
     }
@@ -672,14 +663,14 @@ section {
 
 /* CELULARES (Layout Colunar e Menu Mobile) - 895px ou inferior */
 @media (max-width: 895px) {
-    /* Exibe o Ícone do Menu Hambúrguer e esconde links padão */
+    /* Exibe o ícone do Menu Hambúrguer e esconde links padrão */
     #menu-icon {
         display: block;
         font-size: 3.6rem;
         cursor: pointer;
         z-index: 1001;
     }
-    
+
     .navbar {
         position: absolute;
         top: 100%;
@@ -687,19 +678,19 @@ section {
         right: 0;
         width: 100%;
         padding: 1rem 5% 2rem;
-        background: rgba(255, 255, 255, 0.98);
+        background: var(--mobile-nav-bg);
         border-top: 2px solid var(--main-color);
         border-bottom: 3px solid var(--main-color);
         display: none;
         flex-direction: column;
         align-items: stretch;
-        box-shadow: 0 10px 25px rgba(31, 27, 45, 0.12);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
-    
+
     .navbar.active {
         display: flex; /* Acionado via JavaScript ao clicar no Hambúrguer */
     }
-    
+
     .navbar a {
         display: block;
         font-size: 2rem;
@@ -709,159 +700,146 @@ section {
         text-align: center;
         border-bottom: none;
     }
-    
+
     .navbar a:hover,
     .navbar a.active {
         color: var(--main-color);
         border-bottom: none;
     }
-    
+
     .home {
         flex-direction: column;
         margin: 0;
         padding: 12rem 5% 6rem;
     }
-    
+
     .home-content {
         width: 100%;
         margin-top: 0;
     }
-    
+
     .home-content h1 {
         font-size: 5rem;
         line-height: 1.1;
     }
-    
+
     .home-content h3 {
         font-size: 2.6rem;
         margin: 1.5rem 0;
     }
-    
+
     .home-content p {
         font-size: 1.6rem;
         line-height: 1.7;
     }
-    
+
     .social-icons {
         flex-wrap: wrap;
     }
-    
+
     .social-icons a {
         width: 4.5rem;
         height: 4.5rem;
         font-size: 2.5rem;
         margin: 2rem 0.7rem;
     }
-    
+
     .sobre {
         flex-direction: column-reverse;
         gap: 4rem;
         text-align: center;
         padding: 8rem 5%;
     }
-    
+
     .sobre-content {
         max-width: 100%;
         margin: 0;
     }
-    
+
     .sobre-content h2 {
         text-align: center;
     }
-    
+
     .sobre-content h3 {
         font-size: 2.4rem;
     }
-    
+
     .sobre-content p {
         font-size: 1.6rem;
     }
-    
+
     .sobre-img img {
         width: 60vw;
         max-width: 280px;
         margin: 0;
     }
-    
+
     .heading {
         font-size: 5rem;
     }
-    
-    /* Configuração de cards de projeto em lista única nos celulares */
-    .projetos {
+
+    /* Configuração de cards de projeto e linguagens em lista única nos celulares */
+    .projetos,
+    .linguagens {
         padding: 8rem 5%;
     }
-    
-    .projetos h2 {
+
+    .projetos h2,
+    .linguagens h2 {
         margin-bottom: 3rem;
     }
-    
-    .projetos-container {
+
+    .projetos-container,
+    .linguagens-container {
         grid-template-columns: 1fr;
         margin: 0;
         gap: 2rem;
     }
-    
+
     .projetos-box {
         height: auto;
         min-height: 250px;
     }
-    
+
+    .linguagens-box {
+        height: 220px;
+        min-height: 220px;
+    }
+
     .projetos-box .projetos-info {
         padding: 3rem;
         align-items: center;
         text-align: center;
     }
-    
+
     .projetos-info h4 {
         font-size: 2.8rem;
     }
-    
+
     .projetos-info p {
         font-size: 1.6rem;
     }
-    
+
     .projeto-imagem-box {
         height: 250px;
         min-height: 250px;
     }
-    
-    .contato {
-        padding: 8rem 5%;
-    }
-    
-    .contato form {
-        width: 100%;
-    }
-    
-    .contato form .input-box {
-        flex-direction: column;
-    }
-    
-    .contato form .input-box .input-group {
-        width: 100%;
-    }
-    
-    .contato form textarea {
-        width: 100%;
-        min-height: 180px;
-    }
-    
+
     .footer {
         padding: 35px 15px;
     }
-    
+
     .footer .social {
         gap: 15px;
         padding-bottom: 25px;
     }
-    
+
     .footer .social a {
         width: 40px;
         height: 40px;
         font-size: 22px;
     }
-    
+
     .footer-main-list {
         display: grid;
         grid-template-columns: repeat(2, max-content);
@@ -869,13 +847,13 @@ section {
         gap: 1.5rem 2.5rem;
         margin-bottom: 1.5rem !important;
     }
-    
+
     .footer-secondary-list {
         display: flex;
         flex-direction: column;
         gap: 1rem;
     }
-    
+
     .footer .copyright {
         margin-top: 35px;
         font-size: 1.4rem;
@@ -887,131 +865,123 @@ section {
     html {
         font-size: 55%;
     }
-    
+
     .header {
         padding: 1.8rem 5%;
         height: 75px;
     }
-    
+
     .logo {
         font-size: 2.5rem;
     }
-    
+
     #menu-icon {
         font-size: 3.4rem;
     }
-    
+
     .navbar {
         width: 100%;
         padding: 1rem 5% 1.5rem;
     }
-    
+
     .navbar a {
         font-size: 1.9rem;
         margin: 0;
         padding: 1.3rem;
     }
-    
+
     .home {
         min-height: 100vh;
         padding: 10rem 5% 5rem;
     }
-    
+
     .home-content h1 {
         font-size: 4.2rem;
         line-height: 1.15;
     }
-    
+
     .home-content h3 {
         font-size: 2.3rem;
     }
-    
+
     .home-content p {
         font-size: 1.5rem;
         line-height: 1.7;
     }
-    
+
     .home .btn {
         font-size: 1.5rem;
         padding: 1rem 2rem;
     }
-    
+
     .sobre {
         padding: 7rem 5% 6rem;
         gap: 3rem;
     }
-    
+
     .heading {
         font-size: 4.2rem;
     }
-    
+
     .sobre-img img {
         width: 65vw;
         max-width: 250px;
     }
-    
+
     .sobre-content h3 {
         font-size: 2.2rem;
     }
-    
+
     .sobre-content p {
         font-size: 1.5rem;
         line-height: 1.7;
     }
-    
-    .projetos {
+
+    .projetos,
+    .linguagens {
         padding: 7rem 5% 6rem;
     }
-    
+
     .projetos-box {
         min-height: 230px;
     }
     
+    .linguagens-box {
+        height: 200px;
+        min-height: 200px;
+    }
+
     .projetos-box .projetos-info {
         padding: 2.5rem 2rem;
     }
-    
+
     .projetos-info h4 {
         font-size: 2.5rem;
     }
-    
+
     .projetos-info p {
         font-size: 1.5rem;
     }
-    
+
     .projeto-imagem-box {
         height: 230px;
         min-height: 230px;
     }
-    
-    .contato {
-        padding: 7rem 5% 6rem;
-    }
-    
-    .contato form .input-box input,
-    .contato form textarea {
-        font-size: 1.5rem;
-        padding: 1.6rem;
-    }
-    
-    .contato form textarea {
-        min-height: 160px;
-    }
-    
+
     .footer {
         padding: 30px 10px;
     }
-    
+
     .footer .social {
         gap: 10px;
     }
-    
+
     .footer .social a {
         width: 38px;
         height: 38px;
         font-size: 21px;
     }
-    
+
     .footer-main-list {
         grid-template-columns: 1fr 1fr;
         width: 100%;
@@ -1019,12 +989,12 @@ section {
         row-gap: 1.2rem;
         font-size: 1.5rem;
     }
-    
+
     .footer-secondary-list {
         width: 100%;
         font-size: 1.5rem;
     }
-    
+
     .footer .copyright {
         margin-top: 30px;
         font-size: 1.3rem;

@@ -1,23 +1,34 @@
-/* 
- * Configuração Inicial do Formspree (Serviço de Formulário).
- * Declarado globalmente para garantir que o SDK do Formspree funcione 
- * corretamente ao ser invocado pelo HTML ou por scripts externos.
- */
-window.formspree = window.formspree || function () {
-    (formspree.q = formspree.q || []).push(arguments);
-};
-
-// Vincula as configurações da conta Formspree ao formulário presente na página
-formspree('initForm', {
-    formElement: '#contact-form',
-    formId: 'mgavkvke'
-});
-
-/* 
- * EventListener principal que aguarda o carregamento completo do DOM (Estrutura HTML).
- * Isso garante que tentaremos manipular elementos que já existem na tela.
- */
 document.addEventListener('DOMContentLoaded', () => {
+
+    /* -------------------------------------------------------------
+       LÓGICA DO MODO ESCURO (DARK MODE)
+    ------------------------------------------------------------- */
+    const darkModeToggle = document.getElementById('darkmode-toggle');
+    const body = document.body;
+
+    // 1. Verifica se o usuário já havia escolhido o modo escuro na última visita
+    const darkModeSalvo = localStorage.getItem('darkMode');
+
+    if (darkModeSalvo === 'ativado') {
+        body.classList.add('dark-mode');
+        darkModeToggle.classList.replace('bx-moon', 'bx-sun');
+    }
+
+    // 2. Alterna os modos ao clicar no botão
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Verifica se a classe dark-mode está presente agora
+            if (body.classList.contains('dark-mode')) {
+                darkModeToggle.classList.replace('bx-moon', 'bx-sun');
+                localStorage.setItem('darkMode', 'ativado'); // Salva a preferência
+            } else {
+                darkModeToggle.classList.replace('bx-sun', 'bx-moon');
+                localStorage.setItem('darkMode', 'desativado'); // Salva a preferência
+            }
+        });
+    }
 
     /* -------------------------------------------------------------
        LÓGICA DO MENU MOBILE (HAMBÚRGUER)
@@ -58,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* -------------------------------------------------------------
-       SCROLL SPY (Destacar o link do menu correspondente à seção atual)
+       SCROLL SPY (Destacar o link do menu correspondente á seção atual)
     ------------------------------------------------------------- */
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.navbar a');
@@ -95,37 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Chamada inicial para garantir a marcação correta no carregamento da página
         atualizarMenuAtivo();
     }
-
-    /* -------------------------------------------------------------
-       VALIDAÇÃO DE FORMULÁRIO: CAMPO TELEFONE (Apenas números)
-    ------------------------------------------------------------- */
-    const telefoneInput = document.querySelector('#telefone');
-    if (telefoneInput) {
-        // Intercepta qualquer digitação e remove via Regex o que não for número (\D)
-        telefoneInput.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-    }
-
-    /* -------------------------------------------------------------
-       TRADUÇÃO DE MENSAGENS (FORMSPREE)
-    ------------------------------------------------------------- */
-    /* 
-     * O SDK do Formspree injeta a mensagem padrão "Thank you!" no DOM.
-     * Como não temos controle direto na biblioteca, usamos um MutationObserver
-     * para "vigiar" o HTML e traduzir o texto assim que ele for injetado.
-     */
-    const observer = new MutationObserver(() => {
-        const successDiv = document.querySelector('[data-fs-success]');
-        if (successDiv && successDiv.textContent.trim() === 'Thank you!') {
-            successDiv.textContent = 'Obrigado! Sua mensagem foi enviada.';
-        }
-    });
-
-    // Inicia a observação no body inteiro em busca de alterações de elementos e texto
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-        characterData: true
-    });
 });
+
+/* -------------------------------------------------------------
+   LÓGICA DOS CARDS DE LINGUAGEM
+------------------------------------------------------------- */
+window.mostrarAlerta = function() {
+    alert("Desculpe, ainda não há nada por aqui. Estamos trabalhando para preencher esse espaço. Por favor, por enquanto, continue explorando as outras opções.");
+};
