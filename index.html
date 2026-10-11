@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio Yuri Cardoso</title>
-    
+
     <!-- Importação do arquivo de estilos principal do projeto -->
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Importação da biblioteca de ícones Boxicons para uso em botões e redes sociais -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Cabeçalho fixo contendo a logotipo e a navegação principal -->
     <header class="header">
         <a href="#home" class="logo">
             Yuri <span>Cardoso</span>
         </a>
-        
+
         <!-- Navegação com âncoras para as seções da página (Scroll Spy aplicado via JS) -->
         <nav class="navbar">
             <a href="#home" class="active">Início</a>
@@ -37,22 +39,30 @@
     <section class="home" id="home">
         <div class="home-content">
             <h1>Olá, eu sou <span>Yuri Cardoso</span></h1>
-            <h3>Entusiasta de Desenvolvimento e Tecnologia</h3>
+            <h3>Seja bem-vindo(a) ao meu portfólio!</h3>
             <p>
-                Sou um estudante de Sistemas e Mídias Digitais, interessado na área de desenvolvimento, à procura de
-                oportunidades para criar experiências digitais práticas e funcionais. Com habilidades, principalmente,
-                mas não limitadas a HTML, CSS e JavaScript, busco constantemente aprimorar meus conhecimentos e explorar
-                novas tecnologias para desenvolver soluções inovadoras.
+                Aqui você encontrará meus projetos de destaque detalhados, além de trabalhos que desenvolvi para estudar
+                e aprimorar meus conhecimentos em linguagens e tecnologias específicas.
+            </p>
+            <p>
+                Logo abaixo, deixo um botão de acesso rápido para você ir diretamente aos projetos que julgo mais
+                interessantes.
+            </p>
+            <p>
+                Também disponibilizo ícones de redirecionamento para o meu LinkedIn e GitHub, caso queira saber mais
+                sobre minha trajetória profissional, além do meu e-mail e WhatsApp para contato.
             </p>
             <a href="#projetos" class="btn">Ver Projetos</a>
         </div>
-        
+
         <!-- Links de acesso rápido às plataformas profissionais -->
         <div class="social-icons">
-            <a href="https://www.linkedin.com/in/yuri-da-silva-cardoso-515886215/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/yuri-da-silva-cardoso-515886215/" target="_blank"
+                rel="noopener noreferrer" aria-label="LinkedIn">
                 <i class="bx bxl-linkedin"></i>
             </a>
-            <a href="https://github.com/YuriCardosoSMD?tab=repositories" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a href="https://github.com/YuriCardosoSMD?tab=repositories" target="_blank" rel="noopener noreferrer"
+                aria-label="GitHub">
                 <i class="bx bxl-github"></i>
             </a>
             <a href="mailto:yu.cardoso10@gmail.com" aria-label="E-mail">
@@ -68,14 +78,15 @@
     <section class="sobre" id="sobre">
         <div class="sobre-content">
             <h2 class="heading">Sobre <span>Mim</span></h2>
-            <h3><span>Estudante e </span>Entusiasta</h3>
+            <h3>Para saber mais</h3>
             <p>
-                Sou estudante de Sistemas e Mídias Digitais na Universidade Federal do Ceará (UFC) e desenvolvedor web
-                em formação. Possuo experiência em projetos acadêmicos, atuando tanto no Front-end (HTML, CSS,
-                JavaScript) quanto no Back-end, sendo minha área de maior interesse, com Node.js, MySQL e Firebase. Além do
-                código, tenho noções de Design para web e valorizo a documentação clara de projetos. Sou um entusiasta
-                de tecnologia, com facilidade para trabalho em equipe (utilizando Git/GitHub) e conhecimentos em
-                ambientes Linux e Redes de Computadores.
+                Meu nome é Yuri Cardoso, tenho 22 anos e atualmente sou graduando do curso de Sistemas e Mídias Digitais
+                na Universidade Federal do Ceará. Estou buscando uma oportunidade para adquirir experiência profissional
+                na minha área de desenvolvimento, especialmente com Backend, Banco de Dados, entre outras vertentes.
+                Possuo bagagem teórica e acadêmica desde o ensino médio, que foi técnico em Informática no Instituto
+                Federal do Ceará, seguindo agora pela graduação e em projetos particulares. Gostaria de colocar meus
+                conhecimentos em tecnologias como JavaScript, Node.js, SQL e Python em prática e contribuir para
+                qualquer projeto em que eu for colocado.
             </p>
             <a href="#" class="btn">Leia Mais</a>
         </div>
@@ -89,7 +100,7 @@
     <section class="projetos" id="projetos">
         <h2 class="heading">Projetos</h2>
         <div class="projetos-container">
-            
+
             <!-- Card simples de texto -->
             <div class="projetos-box">
                 <div class="projetos-info">
@@ -100,8 +111,11 @@
 
             <!-- Card com imagem e link para repositório do GitHub -->
             <div class="projetos-box projeto-imagem-box">
-                <a href="https://github.com/Equipe-Simplificando/sistema-de-estoque.git" target="_blank" rel="noopener noreferrer" class="projeto-imagem-link" aria-label="Abrir projeto Sistema de Estoque no GitHub">
-                    <img src="assets/projeto-estoque.png" alt="Tela do projeto Sistema de Estoque" class="projeto-imagem">
+                <a href="https://github.com/Equipe-Simplificando/sistema-de-estoque.git" target="_blank"
+                    rel="noopener noreferrer" class="projeto-imagem-link"
+                    aria-label="Abrir projeto Sistema de Estoque no GitHub">
+                    <img src="assets/projeto-estoque.png" alt="Tela do projeto Sistema de Estoque"
+                        class="projeto-imagem">
                     <span class="projeto-imagem-overlay">Ver projeto no GitHub</span>
                 </a>
             </div>
@@ -116,14 +130,18 @@
             <div class="projetos-box">
                 <div class="projetos-info">
                     <h4>Documentação</h4>
-                    <p>Organização e criação de documentação para facilitar o entendimento e a manutenção de projetos.</p>
+                    <p>Organização e criação de documentação para facilitar o entendimento e a manutenção de projetos.
+                    </p>
                 </div>
             </div>
 
             <!-- Segundo card com imagem -->
             <div class="projetos-box projeto-imagem-box">
-                <a href="https://github.com/YuriCardosoSMD/DIGinterfacecompleta.git" target="_blank" rel="noopener noreferrer" class="projeto-imagem-link" aria-label="Abrir projeto Mandacaru Games no GitHub">
-                    <img src="assets/projeto-mandacaru.png" alt="Tela do projeto Mandacaru Games" class="projeto-imagem">
+                <a href="https://github.com/YuriCardosoSMD/DIGinterfacecompleta.git" target="_blank"
+                    rel="noopener noreferrer" class="projeto-imagem-link"
+                    aria-label="Abrir projeto Mandacaru Games no GitHub">
+                    <img src="assets/projeto-mandacaru.png" alt="Tela do projeto Mandacaru Games"
+                        class="projeto-imagem">
                     <span class="projeto-imagem-overlay">Ver projeto no GitHub</span>
                 </a>
             </div>
@@ -166,10 +184,12 @@
     <!-- Rodapé contendo links de navegação redundantes e direitos autorais -->
     <footer class="footer">
         <div class="social">
-            <a href="https://www.linkedin.com/in/yuri-da-silva-cardoso-515886215/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/yuri-da-silva-cardoso-515886215/" target="_blank"
+                rel="noopener noreferrer" aria-label="LinkedIn">
                 <i class="bx bxl-linkedin"></i>
             </a>
-            <a href="https://github.com/YuriCardosoSMD?tab=repositories" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a href="https://github.com/YuriCardosoSMD?tab=repositories" target="_blank" rel="noopener noreferrer"
+                aria-label="GitHub">
                 <i class="bx bxl-github"></i>
             </a>
             <a href="mailto:yu.cardoso10@gmail.com" aria-label="E-mail">
@@ -179,23 +199,24 @@
                 <i class="bx bxl-whatsapp"></i>
             </a>
         </div>
-        
+
         <ul class="list footer-main-list">
             <li><a href="#home">Início</a></li>
             <li><a href="#sobre">Sobre Mim</a></li>
             <li><a href="#projetos">Projetos</a></li>
             <li><a href="#linguagens">Tecnologias</a></li>
         </ul>
-        
+
         <ul class="list footer-secondary-list">
             <li><a href="#">Perguntas Frequentes</a></li>
             <li><a href="#">Política de Privacidade</a></li>
         </ul>
-        
+
         <p class="copyright">&copy; Yuri Cardoso | Todos os Direitos Reservados</p>
     </footer>
 
     <!-- Script principal onde a interatividade ocorre -->
     <script src="script.js" defer></script>
 </body>
+
 </html>
