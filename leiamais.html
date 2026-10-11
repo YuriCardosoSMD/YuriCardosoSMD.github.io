@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mais Sobre Mim - Yuri Cardoso</title>
+
+    <!-- Importação do arquivo de estilos principal do projeto -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Importação da biblioteca de ícones Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Cabeçalho fixo -->
+    <header class="header">
+        <a href="index.html#home" class="logo">
+            Yuri <span>Cardoso</span>
+        </a>
+
+        <!-- Navegação com âncoras apontando para a página principal (index.html) -->
+        <nav class="navbar">
+            <a href="index.html#home">Início</a>
+            <a href="index.html#sobre">Sobre Mim</a>
+            <a href="index.html#projetos">Projetos</a>
+            <a href="index.html#linguagens">Tecnologias</a>
+        </nav>
+
+        <!-- Agrupamento das ações do cabeçalho (Dark mode e Hambúrguer) -->
+        <div class="header-actions">
+            <i class='bx bx-moon' id="darkmode-toggle" aria-label="Alternar modo escuro" role="button" tabindex="0"></i>
+            <i class="bx bx-menu" id="menu-icon" aria-label="Abrir menu" role="button" tabindex="0"></i>
+        </div>
+    </header>
+
+    <!-- Seção focada nas habilidades e idiomas -->
+    <section class="sobre" style="flex-direction: column; gap: 4rem; padding-top: 15rem; min-height: 80vh;">
+        <div class="sobre-content" style="max-width: 900px; margin: 0 auto; text-align: left;">
+            <h2 class="heading" style="text-align: center; margin-bottom: 5rem;">Mais sobre <span>Mim</span></h2>
+            
+            <h3 style="font-size: 2.6rem; color: var(--main-color); margin-bottom: 1.5rem;">Soft Skills & Trabalho em Equipe</h3>
+            <p style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 2rem;">
+                Acredito que o desenvolvimento de software vai muito além do código. Saber atuar de forma colaborativa é fundamental. Tenho grande <strong>facilidade de cooperação em grupo</strong> e valorizo muito o <strong>trabalho em equipe</strong>, sempre buscando um ambiente de troca de conhecimentos e respeito mútuo para alcançar os melhores resultados.
+            </p>
+            <p style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 4rem;">
+                Além disso, destaco meu <strong>rápido aprendizado</strong> e minha forte capacidade de <strong>comunicação</strong>, o que me permite absorver novas tecnologias e metodologias com agilidade, além de expressar ideias e alinhar expectativas de forma clara com todos os envolvidos no projeto.
+            </p>
+
+            <h3 style="font-size: 2.6rem; color: var(--main-color); margin-bottom: 1.5rem;">Idiomas</h3>
+            <ul style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 4rem; margin-left: 2rem; color: var(--text-color);">
+                <li style="margin-bottom: 1rem;"><strong>Inglês:</strong> Capacidade de ler, falar e escrever.</li>
+                <li style="margin-bottom: 1rem;"><strong>Espanhol:</strong> Capacidade de ler e falar.</li>
+                <li><strong>Francês:</strong> Capacidade de ler e compreender.</li>
+            </ul>
+
+            <div style="text-align: center; margin-top: 5rem;">
+                <a href="index.html#sobre" class="btn">Voltar para o Portfólio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="social">
+            <a href="https://www.linkedin.com/in/yuri-da-silva-cardoso-515886215/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="bx bxl-linkedin"></i>
+            </a>
+            <a href="https://github.com/YuriCardosoSMD?tab=repositories" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="bx bxl-github"></i>
+            </a>
+            <a href="mailto:yu.cardoso10@gmail.com" aria-label="E-mail">
+                <i class="bx bx-envelope"></i>
+            </a>
+            <a href="https://wa.me/5585996855241" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="bx bxl-whatsapp"></i>
+            </a>
+        </div>
+        
+        <ul class="list footer-main-list" style="margin-bottom: 0 !important;">
+            <li><a href="index.html#home">Início</a></li>
+            <li><a href="index.html#sobre">Sobre Mim</a></li>
+            <li><a href="index.html#projetos">Projetos</a></li>
+            <li><a href="index.html#linguagens">Tecnologias</a></li>
+        </ul>
+        
+        <p class="copyright">&copy; Yuri Cardoso | Todos os Direitos Reservados</p>
+    </footer>
+
+    <!-- Script principal -->
+    <script src="script.js" defer></script>
+</body>
+</html>

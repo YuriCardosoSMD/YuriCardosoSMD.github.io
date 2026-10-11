@@ -601,15 +601,6 @@ section {
     margin-bottom: 1.5rem !important;
 }
 
-.footer-secondary-list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2.5rem;
-}
-
-
 .footer .copyright {
     margin-top: 50px;
     text-align: center;
@@ -848,12 +839,6 @@ section {
         margin-bottom: 1.5rem !important;
     }
 
-    .footer-secondary-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
     .footer .copyright {
         margin-top: 35px;
         font-size: 1.4rem;
@@ -987,11 +972,6 @@ section {
         width: 100%;
         column-gap: 10px;
         row-gap: 1.2rem;
-        font-size: 1.5rem;
-    }
-
-    .footer-secondary-list {
-        width: 100%;
         font-size: 1.5rem;
     }
 
