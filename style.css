@@ -514,7 +514,7 @@ section {
 }
 
 .linguagens-box img {
-    max-width: 150px; /* Tamanho dos ícones aumentado */
+    max-width: 200px; /* Tamanho dos ícones aumentado */
     max-height: 150px;
     object-fit: contain;
     transition: transform 0.3s ease-in-out;
