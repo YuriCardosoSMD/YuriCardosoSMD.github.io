@@ -18,12 +18,17 @@
    Centraliza o tema do site.
    ========================================================================== */
 :root {
-    --bg-color: #FFFFFF;          /* 70% Branco - Fundo principal */
-    --secondary-bg-color: #F0F0F0; /* 20% Cinza claro - Fundo secundário */
-    --text-color: #333333;        /* Cinza escuro para manter leitura suave */
-    --main-color: #000000;        /* 10% Preto - Cor de destaque (botões e detalhes) */
-    --white-color: #FFFFFF;       /* Branco puro para contrastes internos */
-    
+    --bg-color: #FFFFFF;
+    /* 70% Branco - Fundo principal */
+    --secondary-bg-color: #F0F0F0;
+    /* 20% Cinza claro - Fundo secundário */
+    --text-color: #333333;
+    /* Cinza escuro para manter leitura suave */
+    --main-color: #000000;
+    /* 10% Preto - Cor de destaque (botões e detalhes) */
+    --white-color: #FFFFFF;
+    /* Branco puro para contrastes internos */
+
     /* Variáveis extras para controle de transparências no Glassmorphism */
     --header-bg: rgba(255, 255, 255, 0.85);
     --header-border: rgba(0, 0, 0, 0.1);
@@ -34,12 +39,17 @@
 
 /* Cores aplicadas quando o JS ativar o modo escuro */
 body.dark-mode {
-    --bg-color: #121212;          /* Fundo principal escuro */
-    --secondary-bg-color: #1a1a1a; /* Fundo secundário mais escuro */
-    --text-color: #f0f0f0;        /* Texto claro */
-    --main-color: #ffffff;        /* Detalhes e botões agora ficam brancos */
-    --white-color: #000000;       /* Texto dentro dos botões invertido para preto */
-    
+    --bg-color: #121212;
+    /* Fundo principal escuro */
+    --secondary-bg-color: #1a1a1a;
+    /* Fundo secundário mais escuro */
+    --text-color: #f0f0f0;
+    /* Texto claro */
+    --main-color: #ffffff;
+    /* Detalhes e botões agora ficam brancos */
+    --white-color: #000000;
+    /* Texto dentro dos botões invertido para preto */
+
     --header-bg: rgba(18, 18, 18, 0.85);
     --header-border: rgba(255, 255, 255, 0.1);
     --mobile-nav-bg: rgba(18, 18, 18, 0.98);
@@ -155,7 +165,8 @@ body {
    5. ESTRUTURA GERAL DAS SEÇÕES (SECTION)
    ========================================================================== */
 section {
-    min-height: 100vh; /* Garante que a seção ocupe pelo menos 100% da tela visível */
+    min-height: 100vh;
+    /* Garante que a seção ocupe pelo menos 100% da tela visível */
     padding: 10rem 9% 10rem;
 }
 
@@ -515,7 +526,8 @@ section {
 }
 
 .linguagens-box img {
-    max-width: 200px; /* Tamanho dos ícones aumentado */
+    max-width: 200px;
+    /* Tamanho dos ícones aumentado */
     max-height: 150px;
     object-fit: contain;
     transition: transform 0.3s ease-in-out;
@@ -527,7 +539,8 @@ section {
 }
 
 .linguagens-box:hover img {
-    transform: scale(1.2); /* Imagem ganha um leve zoom interno adicional */
+    transform: scale(1.2);
+    /* Imagem ganha um leve zoom interno adicional */
 }
 
 /* ==========================================================================
@@ -654,6 +667,7 @@ section {
 
 /* CELULARES (Layout Colunar e Menu Mobile) - 895px ou inferior */
 @media (max-width: 895px) {
+
     /* Exibe o ícone do Menu Hambúrguer e esconde links padrão */
     #menu-icon {
         display: block;
@@ -667,8 +681,10 @@ section {
         top: 100%;
         left: 0;
         right: 0;
-        transform: none; /* Desfaz a centralização do desktop no celular */
-        gap: 0;          /* Mantém o espaçamento original do menu mobile */
+        transform: none;
+        /* Desfaz a centralização do desktop no celular */
+        gap: 0;
+        /* Mantém o espaçamento original do menu mobile */
         width: 100%;
         padding: 1rem 5% 2rem;
         background: var(--mobile-nav-bg);
@@ -681,7 +697,8 @@ section {
     }
 
     .navbar.active {
-        display: flex; /* Acionado via JavaScript ao clicar no Hambúrguer */
+        display: flex;
+        /* Acionado via JavaScript ao clicar no Hambúrguer */
     }
 
     .navbar a {
@@ -932,7 +949,7 @@ section {
     .projetos-box {
         min-height: 230px;
     }
-    
+
     .linguagens-box {
         height: 200px;
         min-height: 200px;
@@ -1181,5 +1198,249 @@ section {
 
     .projetos-tech-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   14. PÁGINA LEIA MAIS (CURRÍCULO E TRAJETÓRIA DETALHADA)
+   ========================================================================== */
+.curriculo-section {
+    min-height: auto;
+    padding: 8rem 9%;
+}
+
+.curriculo-section.bg-principal {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.curriculo-section.bg-secundario {
+    background: var(--secondary-bg-color);
+    color: var(--text-color);
+}
+
+.curriculo-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.curriculo-container .heading {
+    font-size: 6rem;
+    margin-bottom: 5rem;
+}
+
+.curriculo-container .heading span {
+    color: var(--main-color);
+}
+
+.curriculo-bloco {
+    background: var(--bg-color);
+    border: 3px solid var(--main-color);
+    border-radius: 1.2rem;
+    padding: 3.5rem;
+    margin-bottom: 3rem;
+}
+
+.subtitulo-secao {
+    font-size: 2.6rem;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.texto-padrao {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 1.8rem;
+}
+
+/* Grid de 2 colunas para Soft Skills + Idiomas e Formação */
+.curriculo-grid-2col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+}
+
+.curriculo-card {
+    background: var(--bg-color);
+    border: 3px solid var(--main-color);
+    border-radius: 1.2rem;
+    padding: 3.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.subtitulo-card {
+    font-size: 2.4rem;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.lista-idiomas {
+    list-style: none;
+    font-size: 1.6rem;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+.lista-idiomas li {
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--header-border);
+}
+
+.badge-nivel {
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 0.3rem 1.2rem;
+    border-radius: 2rem;
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+/* Cards de Experiência Profissional */
+.experiencia-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.experiencia-card {
+    background: var(--secondary-bg-color);
+    border: 3px solid var(--main-color);
+    border-radius: 1.2rem;
+    padding: 3.5rem;
+    transition: transform 0.3s ease;
+}
+
+.experiencia-card:hover {
+    transform: translateY(-4px);
+}
+
+.experiencia-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--header-border);
+}
+
+.experiencia-topo h3 {
+    font-size: 2.4rem;
+    color: var(--main-color);
+}
+
+.experiencia-topo h4 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-top: 0.4rem;
+}
+
+.periodo-badge {
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.6rem 1.6rem;
+    border-radius: 2rem;
+    background: var(--main-color);
+    color: var(--white-color);
+    white-space: nowrap;
+}
+
+.experiencia-itens {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    margin-left: 2rem;
+    color: var(--text-color);
+}
+
+.experiencia-itens li {
+    margin-bottom: 0.8rem;
+}
+
+/* Grid de Cursos, Certificações e Eventos */
+.certificacoes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.certificacao-item {
+    background: var(--secondary-bg-color);
+    border: 2px solid var(--main-color);
+    border-radius: 1rem;
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: 0.3s ease;
+}
+
+.certificacao-item:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+    transform: translateY(-3px);
+}
+
+.certificacao-item i {
+    font-size: 3.6rem;
+    color: var(--main-color);
+    transition: 0.3s ease;
+}
+
+.certificacao-item:hover i,
+.certificacao-item:hover h4,
+.certificacao-item:hover span {
+    color: var(--white-color);
+}
+
+.certificacao-item h4 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.4rem;
+}
+
+.certificacao-item span {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    opacity: 0.85;
+}
+
+/* Responsividade da página Leia Mais */
+@media (max-width: 991px) {
+    .curriculo-section {
+        padding: 7rem 5%;
+    }
+
+    .curriculo-grid-2col,
+    .certificacoes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 895px) {
+    .curriculo-container .heading {
+        font-size: 4.5rem;
+    }
+
+    .curriculo-bloco,
+    .curriculo-card,
+    .experiencia-card {
+        padding: 2.5rem;
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <!-- Importação da biblioteca de ícones Boxicons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Cabeçalho fixo -->
     <header class="header">
@@ -21,7 +23,7 @@
         <!-- Navegação com âncoras apontando para a página principal (index.html) -->
         <nav class="navbar">
             <a href="index.html#home">Início</a>
-            <a href="index.html#sobre">Sobre Mim</a>
+            <a href="index.html#sobre" class="active">Sobre Mim</a>
             <a href="index.html#projetos">Projetos</a>
             <a href="index.html#linguagens">Tecnologias</a>
         </nav>
@@ -33,28 +35,262 @@
         </div>
     </header>
 
-    <!-- Seção focada nas habilidades e idiomas -->
-    <section class="sobre" style="flex-direction: column; gap: 4rem; padding-top: 15rem; min-height: 80vh;">
-        <div class="sobre-content" style="max-width: 900px; margin: 0 auto; text-align: left;">
-            <h2 class="heading" style="text-align: center; margin-bottom: 5rem;">Mais sobre <span>Mim</span></h2>
-            
-            <h3 style="font-size: 2.6rem; color: var(--main-color); margin-bottom: 1.5rem;">Soft Skills & Trabalho em Equipe</h3>
-            <p style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 2rem;">
-                Acredito que o desenvolvimento de software vai muito além do código. Saber atuar de forma colaborativa é fundamental. Tenho grande <strong>facilidade de cooperação em grupo</strong> e valorizo muito o <strong>trabalho em equipe</strong>, sempre buscando um ambiente de troca de conhecimentos e respeito mútuo para alcançar os melhores resultados.
-            </p>
-            <p style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 4rem;">
-                Além disso, destaco meu <strong>rápido aprendizado</strong> e minha forte capacidade de <strong>comunicação</strong>, o que me permite absorver novas tecnologias e metodologias com agilidade, além de expressar ideias e alinhar expectativas de forma clara com todos os envolvidos no projeto.
-            </p>
+    <!-- ======================================================================
+         SEÇÃO 1: PERFIL PROFISSIONAL, SOFT SKILLS E IDIOMAS
+         ====================================================================== -->
+    <section class="curriculo-section bg-secundario" style="padding-top: 15rem;">
+        <div class="curriculo-container">
+            <h2 class="heading">Mais sobre <span>Mim</span></h2>
 
-            <h3 style="font-size: 2.6rem; color: var(--main-color); margin-bottom: 1.5rem;">Idiomas</h3>
-            <ul style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 4rem; margin-left: 2rem; color: var(--text-color);">
-                <li style="margin-bottom: 1rem;"><strong>Inglês:</strong> Capacidade de ler, falar e escrever.</li>
-                <li style="margin-bottom: 1rem;"><strong>Espanhol:</strong> Capacidade de ler e falar.</li>
-                <li><strong>Francês:</strong> Capacidade de ler e compreender.</li>
-            </ul>
+            <!-- Resumo Profissional do Currículo -->
+            <div class="curriculo-bloco">
+                <h3 class="subtitulo-secao"><i class='bx bx-user-check'></i> Perfil & Atuação Atual</h3>
+                <p class="texto-padrao">
+                    Atuando atualmente como <strong>Assistente de Curadoria de Chatbot</strong>, desempenho funções essenciais para a otimização e evolução dos Assistentes Virtuais, garantindo uma experiência de atendimento eficiente e alinhada às necessidades dos clientes. Minhas responsabilidades incluem a análise e curadoria de diálogos, identificação de melhorias nos fluxos conversacionais e implementação de ajustes para aprimorar a assertividade das respostas. Além disso, participo ativamente na gestão de conteúdo e monitoramento de métricas de desempenho, contribuindo para a melhoria contínua da experiência do usuário e para a satisfação dos clientes.
+                </p>
+            </div>
 
-            <div style="text-align: center; margin-top: 5rem;">
-                <a href="index.html#sobre" class="btn">Voltar para o Portfólio</a>
+            <!-- Grid com Soft Skills (Texto Original Mantido) + Idiomas (Texto Original Mantido) -->
+            <div class="curriculo-grid-2col">
+                <div class="curriculo-card">
+                    <h3 class="subtitulo-card"><i class='bx bx-group'></i> Soft Skills & Trabalho em Equipe</h3>
+                    <p class="texto-padrao">
+                        Acredito que o desenvolvimento de software vai muito além do código. Saber atuar de forma colaborativa é fundamental. Tenho grande <strong>facilidade de cooperação em grupo</strong> e valorizo muito o <strong>trabalho em equipe</strong>, sempre buscando um ambiente de troca de conhecimentos e respeito mútuo para alcançar os melhores resultados.
+                    </p>
+                    <p class="texto-padrao" style="margin-bottom: 2rem;">
+                        Além disso, destaco meu <strong>rápido aprendizado</strong> e minha forte capacidade de <strong>comunicação</strong>, o que me permite absorver novas tecnologias e metodologias com agilidade, além de expressar ideias e alinhar expectativas de forma clara com todos os envolvidos no projeto.
+                    </p>
+
+                    <!-- Habilidades destacadas no currículo -->
+                    <div class="tech-tags" style="margin-bottom: 0;">
+                        <span class="tag">Comunicação</span>
+                        <span class="tag">Trabalho em Equipe</span>
+                        <span class="tag">Pontualidade</span>
+                        <span class="tag">Gestão de Tempo</span>
+                        <span class="tag">Comprometimento</span>
+                        <span class="tag">Experiência com Banco de Dados</span>
+                    </div>
+                </div>
+
+                <div class="curriculo-card">
+                    <h3 class="subtitulo-card"><i class='bx bx-globe'></i> Idiomas</h3>
+                    <ul class="lista-idiomas">
+                        <li>
+                            <strong>Inglês:</strong> Capacidade de ler, falar e escrever <span class="badge-nivel">Avançado</span>
+                        </li>
+                        <li>
+                            <strong>Espanhol:</strong> Capacidade de ler e falar <span class="badge-nivel">Básico</span>
+                        </li>
+                        <li>
+                            <strong>Francês:</strong> Capacidade de ler e compreender <span class="badge-nivel">Básico</span>
+                        </li>
+                    </ul>
+
+                    <h3 class="subtitulo-card" style="margin-top: 3rem;"><i class='bx bx-map-pin'></i> Localização & Contato</h3>
+                    <p class="texto-padrao" style="margin-bottom: 0.8rem;">
+                        <strong>Endereço:</strong> Fortaleza, CE
+                    </p>
+                    <p class="texto-padrao" style="margin-bottom: 0.8rem;">
+                        <strong>E-mail:</strong> yu.cardoso10@gmail.com
+                    </p>
+                    <p class="texto-padrao" style="margin-bottom: 0;">
+                        <strong>Telefone / WhatsApp:</strong> (85) 99685-5241
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         SEÇÃO 2: EXPERIÊNCIAS PROFISSIONAIS
+         ====================================================================== -->
+    <section class="curriculo-section bg-principal">
+        <div class="curriculo-container">
+            <h2 class="heading">Experiências <span>Profissionais</span></h2>
+
+            <div class="experiencia-lista">
+                <!-- Experiência 1 -->
+                <article class="experiencia-card">
+                    <div class="experiencia-topo">
+                        <div>
+                            <h3>Assistente de Curadoria de Chatbot</h3>
+                            <h4>Lanlink Informática LTDA</h4>
+                        </div>
+                        <span class="periodo-badge">Maio de 2025 – Atualmente</span>
+                    </div>
+                    <ul class="experiencia-itens">
+                        <li>Analisar e realizar curadoria de diálogos para garantir a qualidade das interações dos Assistentes Virtuais;</li>
+                        <li>Identificar melhorias nos fluxos conversacionais e implementar ajustes para aumentar a assertividade das respostas;</li>
+                        <li>Gerenciar e atualizar conteúdos utilizados pelos chatbots, assegurando consistência e relevância;</li>
+                        <li>Monitorar métricas de desempenho dos Assistentes Virtuais e propor ações para otimização contínua;</li>
+                        <li>Colaborar com equipes de desenvolvimento e UX para aprimorar a experiência do usuário e garantir a satisfação dos clientes.</li>
+                    </ul>
+                </article>
+
+                <!-- Experiência 2 -->
+                <article class="experiencia-card">
+                    <div class="experiencia-topo">
+                        <div>
+                            <h3>Técnico de Apoio ao Usuário de Informática (Helpdesk)</h3>
+                            <h4>Lanlink Serviços de Informática SA</h4>
+                        </div>
+                        <span class="periodo-badge">Junho de 2024 – Maio de 2025</span>
+                    </div>
+                    <ul class="experiencia-itens">
+                        <li>Receber e registrar solicitações de suporte por telefone, e-mail e/ou chat;</li>
+                        <li>Diagnosticar problemas técnicos relatados pelos usuários;</li>
+                        <li>Fornecer soluções e instruções de forma clara, paciente e concisa;</li>
+                        <li>Escalar problemas complexos para técnicos mais experientes quando necessário;</li>
+                        <li>Prestar suporte à conectividade de rede, incluindo internet, Wi-Fi e VPN.</li>
+                    </ul>
+                </article>
+
+                <!-- Experiência 3 -->
+                <article class="experiencia-card">
+                    <div class="experiencia-topo">
+                        <div>
+                            <h3>Jovem Aprendiz</h3>
+                            <h4>Centro Cearense de Oftalmologia / CCO - CLDO</h4>
+                        </div>
+                        <span class="periodo-badge">Fevereiro de 2023 – Maio de 2024</span>
+                    </div>
+                    <ul class="experiencia-itens">
+                        <li>Auxílio na resolução de problemas técnicos relacionados a computadores, softwares e redes;</li>
+                        <li>Oferecimento de suporte básico aos usuários, como auxiliar na instalação de programas, configurar impressoras e solucionar problemas de conectividade;</li>
+                        <li>Participação na organização do setor de TI, como arquivamento de documentos, manutenção da ordem e limpeza do local de trabalho;</li>
+                        <li>Realização de entregas e coleta de equipamentos, quando necessário.</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         SEÇÃO 3: ESCOLARIDADE / FORMAÇÃO ACADÊMICA
+         ====================================================================== -->
+    <section class="curriculo-section bg-secundario">
+        <div class="curriculo-container">
+            <h2 class="heading">Formação <span>Acadêmica</span></h2>
+
+            <div class="curriculo-grid-2col">
+                <div class="curriculo-card">
+                    <span class="periodo-badge" style="margin-bottom: 1.5rem; display: inline-block;">2024 – Atualmente</span>
+                    <h3 class="subtitulo-card">Curso Superior em Sistemas e Mídias Digitais</h3>
+                    <p class="texto-padrao" style="margin-bottom: 0.5rem;">
+                        <strong>Instituição:</strong> Universidade Federal do Ceará (UFC)
+                    </p>
+                    <p class="texto-padrao" style="margin-bottom: 0;">
+                        <strong>Turno:</strong> Noturno
+                    </p>
+                </div>
+
+                <div class="curriculo-card">
+                    <span class="periodo-badge" style="margin-bottom: 1.5rem; display: inline-block;">2019 – 2023</span>
+                    <h3 class="subtitulo-card">Curso Técnico em Informática</h3>
+                    <p class="texto-padrao" style="margin-bottom: 0.5rem;">
+                        <strong>Instituição:</strong> Instituto Federal do Ceará (IFCE)
+                    </p>
+                    <p class="texto-padrao" style="margin-bottom: 0;">
+                        <strong>Campus:</strong> Fortaleza
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         SEÇÃO 4: CURSOS, CERTIFICAÇÕES E EVENTOS
+         ====================================================================== -->
+    <section class="curriculo-section bg-principal">
+        <div class="curriculo-container">
+            <h2 class="heading">Cursos, Certificações <span>e Eventos</span></h2>
+
+            <div class="certificacoes-grid">
+                <div class="certificacao-item">
+                    <i class='bx bx-data'></i>
+                    <div>
+                        <h4>Banco de Dados Oracle Completo 2026: SQL + PLSQL + Modelagem</h4>
+                        <span>Udemy</span>
+                    </div>
+                </div>
+
+                <div class="certificacao-item">
+                    <i class='bx bx-data'></i>
+                    <div>
+                        <h4>Banco de Dados Oracle 2024 Completo: SQL + PLSQL + Modelagem</h4>
+                        <span>Udemy</span>
+                    </div>
+                </div>
+
+                <div class="certificacao-item">
+                    <i class='bx bx-terminal'></i>
+                    <div>
+                        <h4>Aprenda tudo sobre o Linux! Completo e atualizado v2026!</h4>
+                        <span>Udemy</span>
+                    </div>
+                </div>
+
+                <div class="certificacao-item">
+                    <i class='bx bx-bot'></i>
+                    <div>
+                        <h4>Criando Chatbots com a plataforma BLIP</h4>
+                        <span>Udemy</span>
+                    </div>
+                </div>
+
+                <div class="certificacao-item">
+                    <i class='bx bx-brain'></i>
+                    <div>
+                        <h4>Curso de IA Generativa Online - 3.0</h4>
+                        <span>Geração Tech 3.0 IEL Ceará</span>
+                    </div>
+                </div>
+
+                <div class="certificacao-item">
+                    <i class='bx bx-cog'></i>
+                    <div>
+                        <h4>Biblioteca de boas práticas de gestão de TI (GSTI/ITSM) v3 (ITIL v3)</h4>
+                        <span>Certificação / Capacitação</span>
+                    </div>
+                </div>
+
+                <div class="certificacao-item">
+                    <i class='bx bx-network-chart'></i>
+                    <div>
+                        <h4>Estrutura e Funcionamento das Redes de Computadores Google</h4>
+                        <span>Coursera Google + CIEE</span>
+                    </div>
+                </div>
+
+                <div class="certificacao-item">
+                    <i class='bx bx-support'></i>
+                    <div>
+                        <h4>Fundamentos do Suporte Técnico</h4>
+                        <span>Coursera Google + CIEE</span>
+                    </div>
+                </div>
+
+                <div class="certificacao-item">
+                    <i class='bx bx-briefcase-alt-2'></i>
+                    <div>
+                        <h4>Programa Jovem Aprendiz CIEE</h4>
+                        <span>Centro de Integração Empresa-Escola - CIEE</span>
+                    </div>
+                </div>
+
+                <div class="certificacao-item">
+                    <i class='bx bxl-apple'></i>
+                    <div>
+                        <h4>Cocoa Heads Fortaleza</h4>
+                        <span>Comunidade para desenvolvedores de plataformas Apple (Evento)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 6rem;">
+                <a href="index.html#sobre" class="btn">
+                    <i class='bx bx-arrow-back' style="margin-right: 0.8rem;"></i>Voltar para o Portfólio
+                </a>
             </div>
         </div>
     </section>
@@ -62,10 +298,12 @@
     <!-- Rodapé -->
     <footer class="footer">
         <div class="social">
-            <a href="https://www.linkedin.com/in/yuri-da-silva-cardoso-515886215/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/yuri-da-silva-cardoso-515886215/" target="_blank"
+                rel="noopener noreferrer" aria-label="LinkedIn">
                 <i class="bx bxl-linkedin"></i>
             </a>
-            <a href="https://github.com/YuriCardosoSMD?tab=repositories" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a href="https://github.com/YuriCardosoSMD?tab=repositories" target="_blank" rel="noopener noreferrer"
+                aria-label="GitHub">
                 <i class="bx bxl-github"></i>
             </a>
             <a href="mailto:yu.cardoso10@gmail.com" aria-label="E-mail">
@@ -75,18 +313,19 @@
                 <i class="bx bxl-whatsapp"></i>
             </a>
         </div>
-        
+
         <ul class="list footer-main-list" style="margin-bottom: 0 !important;">
             <li><a href="index.html#home">Início</a></li>
             <li><a href="index.html#sobre">Sobre Mim</a></li>
             <li><a href="index.html#projetos">Projetos</a></li>
             <li><a href="index.html#linguagens">Tecnologias</a></li>
         </ul>
-        
+
         <p class="copyright">&copy; Yuri Cardoso | Todos os Direitos Reservados</p>
     </footer>
 
     <!-- Script principal -->
     <script src="script.js" defer></script>
 </body>
+
 </html>
