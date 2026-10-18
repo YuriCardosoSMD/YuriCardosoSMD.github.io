@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
-            
+
             // Verifica se a classe dark-mode está presente agora
             if (body.classList.contains('dark-mode')) {
                 darkModeToggle.classList.replace('bx-moon', 'bx-sun');
@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
 
     if (menuIcon && navbar) {
-        
+
         // Alterna entre abrir e fechar o menu adicionando/removendo a classe 'active'
         const toggleMenu = () => {
             menuIcon.classList.toggle('bx-x'); // Transforma o hambúrguer em um X
             navbar.classList.toggle('active');
-            
+
             // Atualiza atributos de acessibilidade (ARIA)
             const menuAberto = navbar.classList.contains('active');
             menuIcon.setAttribute('aria-label', menuAberto ? 'Fechar menu' : 'Abrir menu');
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.navbar a');
 
     if (sections.length && navLinks.length) {
-        
+
         const atualizarMenuAtivo = () => {
             let currentSection = '';
             // Define o ponto de cálculo (deslocamento para engatilhar a transição)
@@ -111,6 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
 /* -------------------------------------------------------------
    LÓGICA DOS CARDS DE LINGUAGEM
 ------------------------------------------------------------- */
-window.mostrarAlerta = function() {
+window.mostrarAlerta = function () {
     alert("Desculpe, ainda não há nada por aqui. Estamos trabalhando para preencher esse espaço. Por favor, por enquanto, continue explorando as outras opções.");
 };
