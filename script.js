@@ -106,6 +106,43 @@ document.addEventListener('DOMContentLoaded', () => {
         // Chamada inicial para garantir a marcação correta no carregamento da página
         atualizarMenuAtivo();
     }
+
+    /* -------------------------------------------------------------
+       FILTRO DE PROJETOS NAS PÁGINAS DE TECNOLOGIAS
+    ------------------------------------------------------------- */
+    const filtroBtns = document.querySelectorAll('.filtro-btn');
+    const projetoCards = document.querySelectorAll('.projeto-tech-card');
+    const semProjetosMsg = document.getElementById('sem-projetos-msg');
+
+    if (filtroBtns.length && projetoCards.length) {
+        filtroBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 1. Remove a classe 'active' de todos os botões e ativa o clicado
+                filtroBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filtroSelecionado = btn.getAttribute('data-filter');
+                let projetosVisiveis = 0;
+
+                // 2. Verifica cada card pelo atributo data-tech
+                projetoCards.forEach(card => {
+                    const techsDoCard = card.getAttribute('data-tech').split(' ');
+
+                    if (filtroSelecionado === 'todos' || techsDoCard.includes(filtroSelecionado)) {
+                        card.style.display = 'flex';
+                        projetosVisiveis++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // 3. Exibe mensagem caso nenhum card corresponda ao filtro
+                if (semProjetosMsg) {
+                    semProjetosMsg.style.display = projetosVisiveis === 0 ? 'block' : 'none';
+                }
+            });
+        });
+    }
 });
 
 /* -------------------------------------------------------------
