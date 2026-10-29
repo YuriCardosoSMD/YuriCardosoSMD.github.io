@@ -86,6 +86,19 @@ tr th {
     background-color: #f5f5f5;
 }
 
+/* Garante que o atributo hidden funcione mesmo em elementos com display definido
+   (usado nos cards filtrados e na mensagem "sem projetos") */
+[hidden] {
+    display: none !important;
+}
+
+/* O reset global usa "outline: none", o que esconde o foco do teclado.
+   Esta regra devolve o contorno apenas para quem navega pelo teclado. */
+:focus-visible {
+    outline: 2px solid var(--main-color);
+    outline-offset: 4px;
+}
+
 /* ==========================================================================
    4. HEADER E NAVEGAÇÃO PRINCIPAL (NAVBAR)
    ========================================================================== */
@@ -154,12 +167,22 @@ tr th {
     gap: 1.5rem;
 }
 
-/* Ícone do Modo Escuro */
-#darkmode-toggle {
-    font-size: 2.8rem;
+/* Botões de ícone do header (modo escuro e menu).
+   Zera o visual padrão que o navegador aplica em <button>. */
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: none;
     color: var(--text-color);
     cursor: pointer;
     transition: 0.3s ease;
+}
+
+/* Botão do Modo Escuro */
+#darkmode-toggle {
+    font-size: 2.8rem;
 }
 
 #darkmode-toggle:hover {
@@ -167,12 +190,10 @@ tr th {
     color: var(--main-color);
 }
 
-/* Ícone de Menu Hambúrguer (inativo no Desktop, ativado nas Media Queries) */
+/* Botão de Menu Hambúrguer (inativo no Desktop, ativado nas Media Queries) */
 #menu-icon {
     font-size: 3.6rem;
-    color: var(--text-color);
     display: none;
-    cursor: pointer;
 }
 
 /* ==========================================================================
@@ -573,7 +594,7 @@ section {
 .footer {
     width: 100%;
     padding: 40px 20px;
-    background-color: var(--secondary-bg-color);
+    background-color: var(--bg-color);
     text-align: center;
 }
 
@@ -636,7 +657,6 @@ section {
     align-items: center;
     flex-wrap: wrap;
     gap: 2.5rem;
-    margin-bottom: 1.5rem !important;
 }
 
 .footer .copyright {
@@ -692,11 +712,10 @@ section {
 /* CELULARES (Layout Colunar e Menu Mobile) - 895px ou inferior */
 @media (max-width: 895px) {
 
-    /* Exibe o ícone do Menu Hambúrguer e esconde links padrão */
+    /* Exibe o botão do Menu Hambúrguer e esconde links padrão */
     #menu-icon {
-        display: block;
+        display: inline-flex;
         font-size: 3.6rem;
-        cursor: pointer;
         z-index: 1001;
     }
 
@@ -879,7 +898,6 @@ section {
         grid-template-columns: repeat(2, max-content);
         justify-content: center;
         gap: 1.5rem 2.5rem;
-        margin-bottom: 1.5rem !important;
     }
 
     .footer .copyright {
@@ -1056,7 +1074,7 @@ section {
     color: var(--text-color);
 }
 
-/* Barra de botões de filtro */
+/* Barra de botões de filtro (usada apenas em páginas que tiverem filtros) */
 .filtros-container {
     display: flex;
     justify-content: center;
@@ -1142,7 +1160,8 @@ section {
     flex-grow: 1;
 }
 
-.card-body h3 {
+/* Título do card (h2.card-title) */
+.card-body .card-title {
     font-size: 2.2rem;
     color: var(--main-color);
     margin-bottom: 1.2rem;
@@ -1156,12 +1175,13 @@ section {
     flex-grow: 1;
 }
 
-/* Etiquetas (Tags) de Tecnologias */
+/* Etiquetas (Tags) de Tecnologias - lista <ul> */
 .tech-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
     margin-bottom: 2.2rem;
+    list-style: none;
 }
 
 .tech-tags .tag {
@@ -1206,6 +1226,17 @@ section {
     font-size: 1.8rem;
     margin: 4rem 0;
     color: var(--text-color);
+}
+
+/* Botão "Voltar para Tecnologias" (substitui os estilos inline) */
+.voltar-container {
+    text-align: center;
+    margin-top: 6rem;
+}
+
+.voltar-container .btn i {
+    margin-right: 0.8rem;
+    vertical-align: middle;
 }
 
 /* Responsividade da página de projetos por tecnologia */
