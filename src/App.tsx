@@ -149,16 +149,28 @@ const htmlCssProjects = [
   },
 ];
 
-function usePage(): [Page, (page: Page) => void] {
+function goToSection(id: string) {
+  if (window.location.hash === `#${id}`) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+  window.location.hash = id;
+}
+
+function usePage(): [Page, (page: Page) => void, string] {
   const getPage = (): Page => {
     const hash = window.location.hash.replace('#', '');
     return hash === 'sobre' ? 'about' : hash === 'projetos-html-css' ? 'htmlcss' : 'home';
   };
 
   const [page, setPage] = useState<Page>(getPage);
+  const [hash, setHash] = useState(() => window.location.hash.replace('#', ''));
 
   useEffect(() => {
-    const onHashChange = () => setPage(getPage());
+    const onHashChange = () => {
+      setPage(getPage());
+      setHash(window.location.hash.replace('#', ''));
+    };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
@@ -169,6 +181,7 @@ function usePage(): [Page, (page: Page) => void] {
       window.location.hash =
         next === 'about' ? 'sobre' : next === 'htmlcss' ? 'projetos-html-css' : 'home';
     },
+    hash,
   ];
 }
 
@@ -181,34 +194,23 @@ function SectionTitle({ title }: { title: string }) {
 }
 
 function Header({
-  setPage,
   dark,
   setDark,
 }: {
-  setPage: (page: Page) => void;
   dark: boolean;
   setDark: (dark: boolean) => void;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const links = [
     ['home', 'Início'],
-    ['sobre', 'Sobre Mim'],
+    ['resumo', 'Sobre Mim'],
     ['projetos', 'Projetos'],
     ['linguagens', 'Tecnologias'],
   ] as const;
 
   const navigate = (target: string) => {
-    setPage('home');
     setMenuOpen(false);
-    window.setTimeout(() => {
-      const section = document.getElementById(target);
-      if (!section) return;
-      const headerHeight = document.querySelector('header')?.getBoundingClientRect().height ?? 0;
-      window.scrollTo({
-        top: section.getBoundingClientRect().top + window.scrollY - headerHeight,
-        behavior: 'smooth',
-      });
-    }, 0);
+    goToSection(target);
   };
 
   return (
@@ -331,7 +333,7 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
       </section>
 
       <section
-        id="sobre"
+        id="resumo"
         className="min-h-[calc(100vh-73px)] scroll-mt-24 bg-slate-50 px-6 py-24 dark:bg-slate-900/50"
       >
         <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
@@ -580,25 +582,12 @@ function About() {
   );
 }
 
-function HtmlCssProjects({ setPage }: { setPage: (page: Page) => void }) {
+function HtmlCssProjects() {
   const [filter, setFilter] = useState<Filter>('todos');
   const visible =
     filter === 'todos'
       ? htmlCssProjects
       : htmlCssProjects.filter((project) => project.tags.includes(filter));
-
-  const navigateToTechnologies = () => {
-    setPage('home');
-    window.setTimeout(() => {
-      const section = document.getElementById('linguagens');
-      if (!section) return;
-      const headerHeight = document.querySelector('header')?.getBoundingClientRect().height ?? 0;
-      window.scrollTo({
-        top: section.getBoundingClientRect().top + window.scrollY - headerHeight,
-        behavior: 'smooth',
-      });
-    }, 0);
-  };
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-20">
@@ -664,7 +653,7 @@ function HtmlCssProjects({ setPage }: { setPage: (page: Page) => void }) {
       </div>
 
       <button
-        onClick={navigateToTechnologies}
+        onClick={() => goToSection('linguagens')}
         className="mx-auto mt-12 flex w-fit items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 font-bold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
       >
         <ArrowLeft size={18} /> Voltar para tecnologias
@@ -674,7 +663,7 @@ function HtmlCssProjects({ setPage }: { setPage: (page: Page) => void }) {
 }
 
 export default function App() {
-  const [page, setPage] = usePage();
+  const [page, setPage, hash] = usePage();
   const [dark, setDark] = useState(() => localStorage.getItem('darkMode') === 'ativado');
 
   useEffect(() => {
@@ -683,17 +672,22 @@ export default function App() {
   }, [dark]);
 
   useEffect(() => {
-    if (page !== 'home' || window.location.hash === '#home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (page !== 'home') {
+      window.scrollTo({ top: 0 });
+      return;
     }
-  }, [page]);
+    window.requestAnimationFrame(() => {
+      const id = hash || 'home';
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    });
+  }, [page, hash]);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 transition-colors dark:bg-slate-950 dark:text-white">
-      <Header setPage={setPage} dark={dark} setDark={setDark} />
+      <Header dark={dark} setDark={setDark} />
       {page === 'home' && <Home setPage={setPage} />}
       {page === 'about' && <About />}
-      {page === 'htmlcss' && <HtmlCssProjects setPage={setPage} />}
+      {page === 'htmlcss' && <HtmlCssProjects />}
       <Footer />
     </div>
   );
