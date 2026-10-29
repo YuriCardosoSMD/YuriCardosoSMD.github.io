@@ -547,6 +547,12 @@ section {
     transition: transform 0.3s ease-in-out;
 }
 
+.linguagens-box i {
+    font-size: 15rem;
+    color: var(--main-color);
+    transition: transform 0.3s ease-in-out;
+}
+
 .linguagens-box:hover {
     background: var(--main-color);
     transform: scale(1.03);
@@ -555,6 +561,10 @@ section {
 .linguagens-box:hover img {
     transform: scale(1.2);
     /* Imagem ganha um leve zoom interno adicional */
+}
+
+.linguagens-box:hover i {
+    transform: scale(1.2);
 }
 
 /* ==========================================================================
