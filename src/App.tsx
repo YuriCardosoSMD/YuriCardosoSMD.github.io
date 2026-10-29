@@ -86,7 +86,7 @@ const technologies = [
   { name: 'React', image: '/assets/React.png', available: false },
   { name: 'Node.js', image: '/assets/Node.js.png', available: false },
   { name: 'Python', image: '/assets/PythonIcon.png', available: false },
-  { name: 'SQL / PostgreSQL', image: '/assets/PostgresSQL.png', available: false },
+  { name: 'SQL / PostgreSQL', image: '/assets/PostgreSQL.png', available: false },
 ];
 
 const experiences = [
@@ -167,7 +167,7 @@ function usePage(): [Page, (page: Page) => void] {
     page,
     (next) => {
       window.location.hash =
-        next === 'about' ? 'sobre' : next === 'projetos-html-css' ? 'projetos-html-css' : 'home';
+        next === 'about' ? 'sobre' : next === 'htmlcss' ? 'projetos-html-css' : 'home';
     },
   ];
 }
@@ -580,12 +580,25 @@ function About() {
   );
 }
 
-function HtmlCssProjects() {
+function HtmlCssProjects({ setPage }: { setPage: (page: Page) => void }) {
   const [filter, setFilter] = useState<Filter>('todos');
   const visible =
     filter === 'todos'
       ? htmlCssProjects
       : htmlCssProjects.filter((project) => project.tags.includes(filter));
+
+  const navigateToTechnologies = () => {
+    setPage('home');
+    window.setTimeout(() => {
+      const section = document.getElementById('linguagens');
+      if (!section) return;
+      const headerHeight = document.querySelector('header')?.getBoundingClientRect().height ?? 0;
+      window.scrollTo({
+        top: section.getBoundingClientRect().top + window.scrollY - headerHeight,
+        behavior: 'smooth',
+      });
+    }, 0);
+  };
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-20">
@@ -650,12 +663,12 @@ function HtmlCssProjects() {
         ))}
       </div>
 
-      <a
-        href="#home"
+      <button
+        onClick={navigateToTechnologies}
         className="mx-auto mt-12 flex w-fit items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 font-bold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
       >
         <ArrowLeft size={18} /> Voltar para tecnologias
-      </a>
+      </button>
     </main>
   );
 }
@@ -680,7 +693,7 @@ export default function App() {
       <Header setPage={setPage} dark={dark} setDark={setDark} />
       {page === 'home' && <Home setPage={setPage} />}
       {page === 'about' && <About />}
-      {page === 'htmlcss' && <HtmlCssProjects />}
+      {page === 'htmlcss' && <HtmlCssProjects setPage={setPage} />}
       <Footer />
     </div>
   );
