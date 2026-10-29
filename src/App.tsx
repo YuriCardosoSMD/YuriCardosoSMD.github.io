@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import {
   ArrowLeft,
   ArrowUpRight,
-  Check,
+  Award,
+  CalendarDays,
   Code2,
   Database,
   Github,
@@ -32,6 +33,12 @@ interface ProjectItem {
   image?: string;
   alt?: string;
   repo?: string;
+}
+
+interface Certificate {
+  name: string;
+  provider: string;
+  url?: string;
 }
 
 const socialLinks = [
@@ -126,17 +133,32 @@ const education = [
   },
 ];
 
-const certificates = [
-  ['Banco de Dados Oracle Completo 2026: SQL + PLSQL + Modelagem', 'Udemy'],
-  ['Aprenda tudo sobre o Linux! Completo e atualizado v2026!', 'Udemy'],
-  ['Criando Chatbots com a plataforma BLIP', 'Udemy'],
-  ['Curso de IA Generativa Online - 3.0', 'Geração Tech 3.0 IEL Ceará'],
-  ['Biblioteca de boas práticas de gestão de TI (GSTI/ITSM) v3 (ITIL v3)', 'Certificação / Capacitação'],
-  ['Estrutura e Funcionamento das Redes de Computadores Google', 'Coursera Google + CIEE'],
-  ['Fundamentos do Suporte Técnico', 'Coursera Google + CIEE'],
-  ['Programa Jovem Aprendiz CIEE', 'Centro de Integração Empresa-Escola - CIEE'],
-  ['Cocoa Heads Fortaleza', 'Comunidade para desenvolvedores de plataformas Apple (Evento)'],
-] as const;
+const certificates: Certificate[] = [
+  { name: 'Banco de Dados Oracle Completo 2026: SQL + PLSQL + Modelagem', provider: 'Udemy' },
+  { name: 'Aprenda tudo sobre o Linux! Completo e atualizado v2026!', provider: 'Udemy' },
+  { name: 'Criando Chatbots com a plataforma BLIP', provider: 'Udemy' },
+  { name: 'Curso de IA Generativa Online - 3.0', provider: 'Geração Tech 3.0 IEL Ceará' },
+  {
+    name: 'Biblioteca de boas práticas de gestão de TI (GSTI/ITSM) v3 (ITIL v3)',
+    provider: 'Certificação / Capacitação',
+  }, // TODO: informar a instituição emissora
+  {
+    name: 'Estrutura e Funcionamento das Redes de Computadores',
+    provider: 'Coursera Google + CIEE',
+  },
+  { name: 'Fundamentos do Suporte Técnico', provider: 'Coursera Google + CIEE' },
+  {
+    name: 'Programa Jovem Aprendiz CIEE',
+    provider: 'Centro de Integração Empresa-Escola - CIEE',
+  },
+];
+
+const events: Certificate[] = [
+  {
+    name: 'Cocoa Heads Fortaleza',
+    provider: 'Comunidade para desenvolvedores de plataformas Apple',
+  },
+];
 
 const htmlCssProjects = [
   {
@@ -476,7 +498,7 @@ function About() {
       <SectionTitle title="Mais sobre Mim" />
 
       <div className="mt-12 grid gap-8 md:grid-cols-2">
-        <article className="rounded-2xl border border-slate-200 p-8 dark:border-slate-800">
+        <article className="rounded-2xl border border-slate-200 p-8 dark:border-slate-800 md:col-span-2">
           <h3 className="flex items-center gap-3 text-2xl font-bold text-slate-900 dark:text-white">
             <Users /> Perfil & Atuação Atual
           </h3>
@@ -502,10 +524,19 @@ function About() {
               <strong>Francês:</strong> Básico
             </li>
           </ul>
-          <p className="mt-6 text-slate-600 dark:text-slate-300">
+        </article>
+
+        <article className="rounded-2xl border border-slate-200 p-8 dark:border-slate-800">
+          <h3 className="flex items-center gap-3 text-2xl font-bold text-slate-900 dark:text-white">
+            <Mail /> Contato
+          </h3>
+          <p className="mt-5 text-slate-600 dark:text-slate-300">
             <strong>Localização:</strong> Fortaleza, CE
             <br />
-            <strong>E-mail:</strong> yu.cardoso10@gmail.com
+            <strong>E-mail:</strong>{' '}
+            <a href="mailto:yu.cardoso10@gmail.com" className="hover:underline">
+              yu.cardoso10@gmail.com
+            </a>
             <br />
             <strong>Telefone:</strong> (85) 99685-5241
           </p>
@@ -556,19 +587,73 @@ function About() {
 
       <section className="mt-24">
         <SectionTitle title="Cursos, Certificações e Eventos" />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          {certificates.map(([name, provider]) => (
-            <article
-              key={name}
-              className="flex gap-4 rounded-xl border border-slate-200 p-5 dark:border-slate-800"
-            >
-              <Check className="shrink-0 text-slate-900 dark:text-white" />
-              <div>
-                <h3 className="font-semibold text-slate-900 dark:text-white">{name}</h3>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{provider}</p>
-              </div>
-            </article>
-          ))}
+        <h3 className="mt-10 text-2xl font-bold text-slate-900 dark:text-white">
+          Cursos e Certificações
+        </h3>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {certificates.map(({ name, provider, url }) => {
+            const content = (
+              <>
+                <Award className="shrink-0 text-slate-900 dark:text-white" />
+                <div>
+                  <h4 className="font-semibold text-slate-900 dark:text-white">{name}</h4>
+                  <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{provider}</p>
+                </div>
+              </>
+            );
+
+            return url ? (
+              <a
+                key={name}
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                className="flex gap-4 rounded-xl border border-slate-200 p-5 transition hover:border-slate-900 dark:border-slate-800 dark:hover:border-slate-600"
+              >
+                {content}
+              </a>
+            ) : (
+              <article
+                key={name}
+                className="flex gap-4 rounded-xl border border-slate-200 p-5 dark:border-slate-800"
+              >
+                {content}
+              </article>
+            );
+          })}
+        </div>
+        <h3 className="mt-10 text-2xl font-bold text-slate-900 dark:text-white">Eventos</h3>
+        <div className="mt-6 grid gap-4">
+          {events.map(({ name, provider, url }) => {
+            const content = (
+              <>
+                <CalendarDays className="shrink-0 text-slate-900 dark:text-white" />
+                <div>
+                  <h4 className="font-semibold text-slate-900 dark:text-white">{name}</h4>
+                  <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{provider}</p>
+                </div>
+              </>
+            );
+
+            return url ? (
+              <a
+                key={name}
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                className="flex gap-4 rounded-xl border border-slate-200 p-5 transition hover:border-slate-900 dark:border-slate-800 dark:hover:border-slate-600"
+              >
+                {content}
+              </a>
+            ) : (
+              <article
+                key={name}
+                className="flex gap-4 rounded-xl border border-slate-200 p-5 dark:border-slate-800"
+              >
+                {content}
+              </article>
+            );
+          })}
         </div>
       </section>
 
