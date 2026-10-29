@@ -23,8 +23,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-type Page = 'home' | 'about' | 'htmlcss';
-type Filter = 'todos' | 'html' | 'css' | 'flexbox';
+type Page = 'home' | 'about' | 'technology';
 
 interface ProjectItem {
   title: string;
@@ -39,6 +38,27 @@ interface Certificate {
   name: string;
   provider: string;
   url?: string;
+}
+
+interface TechProject {
+  title: string;
+  summary: string;
+  highlights: string[];
+  tags: string[];
+  status: 'concluido' | 'em-andamento';
+  image: string;
+  imageMobile?: string;
+  liveUrl?: string;
+  repoUrl: string;
+}
+
+interface TechPageData {
+  slug: string;
+  name: string;
+  icon: string;
+  intro: string;
+  skills: string[];
+  projects: TechProject[];
 }
 
 const socialLinks = [
@@ -87,13 +107,71 @@ const mainProjects: ProjectItem[] = [
   },
 ];
 
-const technologies = [
-  { name: 'HTML + CSS', image: '/assets/HTMLCSSIcon.png', available: true },
-  { name: 'TypeScript + JavaScript', image: '/assets/JsTsIcon.png', available: false },
-  { name: 'React', image: '/assets/React.png', available: false },
-  { name: 'Node.js', image: '/assets/Node.js.png', available: false },
-  { name: 'Python', image: '/assets/PythonIcon.png', available: false },
-  { name: 'SQL / PostgreSQL', image: '/assets/PostgreSQL.png', available: false },
+const techPages: TechPageData[] = [
+  {
+    slug: 'html-css',
+    name: 'HTML + CSS',
+    icon: '/assets/HTMLCSSIcon.png',
+    intro:
+      'Projetos que mostram como estruturo páginas com HTML semântico e construo layouts responsivos com CSS, sem frameworks.',
+    skills: ['HTML semântico', 'Flexbox', 'Media queries', 'Layout responsivo'],
+    projects: [
+      {
+        title: 'Cartão de Perfil Responsivo',
+        summary: 'Cartão de perfil que se adapta do celular ao desktop.',
+        highlights: [
+          'Alinhamento e distribuição de elementos com Flexbox',
+          'Adaptação do layout a diferentes telas com media queries',
+          'Organização semântica do conteúdo',
+        ],
+        tags: ['Flexbox', 'Responsivo', 'Semântica'],
+        status: 'concluido',
+        image: '/assets/Cartao_de_Perfil_Responsivo.png',
+        repoUrl: 'https://github.com/YuriCardosoSMD/Cartao_de_Perfil_Responsivo_Treino-HTML_CSS',
+        // TODO: adicionar liveUrl quando o GitHub Pages do repositório estiver ativo
+      },
+    ],
+  },
+  {
+    slug: 'typescript-javascript',
+    name: 'TypeScript + JavaScript',
+    icon: '/assets/JsTsIcon.png',
+    intro: '',
+    skills: [],
+    projects: [],
+  },
+  {
+    slug: 'react',
+    name: 'React',
+    icon: '/assets/React.png',
+    intro: '',
+    skills: [],
+    projects: [],
+  },
+  {
+    slug: 'nodejs',
+    name: 'Node.js',
+    icon: '/assets/Node.js.png',
+    intro: '',
+    skills: [],
+    projects: [],
+  },
+  {
+    slug: 'python',
+    name: 'Python',
+    icon: '/assets/PythonIcon.png',
+    intro: '',
+    skills: [],
+    projects: [],
+  },
+  {
+    slug: 'sql-postgresql',
+    name: 'SQL / PostgreSQL',
+    icon: '/assets/PostgreSQL.png',
+    intro: '',
+    skills: [],
+    projects: [],
+  },
 ];
 
 const experiences = [
@@ -160,17 +238,6 @@ const events: Certificate[] = [
   },
 ];
 
-const htmlCssProjects = [
-  {
-    title: 'Cartão de Perfil Responsivo',
-    description:
-      'Cartão de perfil digital com foto, biografia e links para redes profissionais. Layout responsivo com Flexbox e media queries.',
-    tags: ['html', 'css', 'flexbox'] as Filter[],
-    image: '/assets/Cartao_de_Perfil_Responsivo.png',
-    href: 'https://github.com/YuriCardosoSMD/Cartao_de_Perfil_Responsivo_Treino-HTML_CSS',
-  },
-];
-
 function goToSection(id: string) {
   if (window.location.hash === `#${id}`) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -179,19 +246,34 @@ function goToSection(id: string) {
   window.location.hash = id;
 }
 
-function usePage(): [Page, (page: Page) => void, string] {
-  const getPage = (): Page => {
+function usePage(): [Page, (page: Page) => void, string, string | undefined] {
+  const getRoute = () => {
     const hash = window.location.hash.replace('#', '');
-    return hash === 'sobre' ? 'about' : hash === 'projetos-html-css' ? 'htmlcss' : 'home';
+    if (hash === 'projetos-html-css') {
+      window.history.replaceState(null, '', '#tecnologia/html-css');
+      return { page: 'technology' as Page, hash: 'tecnologia/html-css', slug: 'html-css' };
+    }
+    if (hash === 'sobre') return { page: 'about' as Page, hash, slug: undefined };
+    if (hash.startsWith('tecnologia/')) {
+      const slug = hash.replace('tecnologia/', '');
+      if (techPages.some((tech) => tech.slug === slug)) {
+        return { page: 'technology' as Page, hash, slug };
+      }
+    }
+    return { page: 'home' as Page, hash, slug: undefined };
   };
 
-  const [page, setPage] = useState<Page>(getPage);
-  const [hash, setHash] = useState(() => window.location.hash.replace('#', ''));
+  const initialRoute = getRoute();
+  const [page, setPage] = useState<Page>(initialRoute.page);
+  const [hash, setHash] = useState(initialRoute.hash);
+  const [slug, setSlug] = useState<string | undefined>(initialRoute.slug);
 
   useEffect(() => {
     const onHashChange = () => {
-      setPage(getPage());
-      setHash(window.location.hash.replace('#', ''));
+      const route = getRoute();
+      setPage(route.page);
+      setHash(route.hash);
+      setSlug(route.slug);
     };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
@@ -201,9 +283,14 @@ function usePage(): [Page, (page: Page) => void, string] {
     page,
     (next) => {
       window.location.hash =
-        next === 'about' ? 'sobre' : next === 'htmlcss' ? 'projetos-html-css' : 'home';
+        next === 'about'
+          ? 'sobre'
+          : next === 'technology'
+            ? `tecnologia/${slug ?? 'html-css'}`
+            : 'home';
     },
     hash,
+    slug,
   ];
 }
 
@@ -311,8 +398,6 @@ function Footer() {
 }
 
 function Home({ setPage }: { setPage: (page: Page) => void }) {
-  const [notice, setNotice] = useState('');
-
   return (
     <main>
       <section
@@ -449,19 +534,17 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
           </p>
 
           <div className="mt-12 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {technologies.map((tech) => (
+            {techPages.map((tech) => (
               <button
-                key={tech.name}
-                onClick={() =>
-                  tech.available
-                    ? setPage('htmlcss')
-                    : setNotice(`Ainda não há projetos publicados com ${tech.name}.`)
-                }
+                key={tech.slug}
+                onClick={() => {
+                  window.location.hash = `tecnologia/${tech.slug}`;
+                }}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white text-left shadow-sm transition hover:-translate-y-1 hover:border-slate-900 hover:shadow-md dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-600"
               >
                 <div className="flex h-48 items-center justify-center bg-slate-100 dark:bg-slate-800">
                   <img
-                    src={tech.image}
+                    src={tech.icon}
                     alt={tech.name}
                     className="h-24 w-24 object-contain transition group-hover:scale-110"
                   />
@@ -470,22 +553,13 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
                   <span className="block text-xl font-bold text-slate-900 dark:text-white">
                     {tech.name}
                   </span>
+                  <span className="mt-2 block text-sm text-slate-600 dark:text-slate-300">
+                    {tech.projects.length === 0 ? 'Em breve' : `${tech.projects.length} projeto(s)`}
+                  </span>
                 </div>
               </button>
             ))}
           </div>
-
-          {notice && (
-            <div
-              role="status"
-              className="mx-auto mt-8 flex max-w-md items-center justify-between rounded-xl bg-slate-200/80 p-4 text-sm text-slate-900 dark:bg-slate-800 dark:text-slate-100"
-            >
-              {notice}
-              <button onClick={() => setNotice('')} aria-label="Fechar aviso">
-                <X size={18} />
-              </button>
-            </div>
-          )}
         </div>
       </section>
     </main>
@@ -667,88 +741,196 @@ function About() {
   );
 }
 
-function HtmlCssProjects() {
-  const [filter, setFilter] = useState<Filter>('todos');
-  const visible =
-    filter === 'todos'
-      ? htmlCssProjects
-      : htmlCssProjects.filter((project) => project.tags.includes(filter));
+function TechPage({ data }: { data: TechPageData }) {
+  const [filter, setFilter] = useState('Todos');
+  const tags = Array.from(new Set(data.projects.flatMap((project) => project.tags)));
+  const visibleProjects =
+    filter === 'Todos'
+      ? data.projects
+      : data.projects.filter((project) => project.tags.includes(filter));
+  const currentIndex = techPages.findIndex((tech) => tech.slug === data.slug);
+  const previous = currentIndex > 0 ? techPages[currentIndex - 1] : undefined;
+  const next = currentIndex < techPages.length - 1 ? techPages[currentIndex + 1] : undefined;
+  const githubLink = socialLinks.find((link) => link.label === 'GitHub')?.href;
+
+  useEffect(() => {
+    setFilter('Todos');
+  }, [data.slug]);
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-20">
-      <SectionTitle title="Projetos HTML & CSS" />
-      <p className="mx-auto mt-6 max-w-2xl text-center leading-8 text-slate-600 dark:text-slate-300">
-        Páginas construídas apenas com HTML e CSS, com foco em estrutura semântica, layout
-        responsivo e acessibilidade.
-      </p>
-
-      <div className="mt-10 flex flex-wrap justify-center gap-3">
-        {(['todos', 'html', 'css', 'flexbox'] as Filter[]).map((value) => (
-          <button
-            key={value}
-            onClick={() => setFilter(value)}
-            className={`rounded-full px-4 py-2 text-sm font-bold capitalize transition ${
-              filter === value
-                ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
-            }`}
-          >
-            {value}
-          </button>
-        ))}
+      <div className="flex flex-col items-center text-center">
+        <img src={data.icon} alt={data.name} className="h-16 w-16 object-contain" />
+        <div className="mt-6">
+          <SectionTitle title={`Projetos ${data.name}`} />
+        </div>
+        {data.intro && (
+          <p className="mx-auto mt-6 max-w-2xl leading-8 text-slate-600 dark:text-slate-300">
+            {data.intro}
+          </p>
+        )}
       </div>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
-        {visible.map((project) => (
-          <article
-            key={project.title}
-            className="overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
-          >
-            <img
-              src={project.image}
-              alt={`Tela do projeto ${project.title}`}
-              className="h-64 w-full object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
-              <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">
-                {project.description}
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase text-slate-900 dark:bg-slate-800 dark:text-slate-100"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex items-center gap-2 font-bold text-slate-900 hover:underline dark:text-white"
+      {data.skills.length > 0 && (
+        <section className="mt-12">
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white">O que pratiquei</h3>
+          <div className="mt-5 flex flex-wrap gap-3">
+            {data.skills.map((skill) => (
+              <span
+                key={skill}
+                className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-100"
               >
-                Repositório <ArrowUpRight size={17} />
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
+      )}
 
-      <button
-        onClick={() => goToSection('linguagens')}
-        className="mx-auto mt-12 flex w-fit items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 font-bold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
-      >
-        <ArrowLeft size={18} /> Voltar para tecnologias
-      </button>
+      {data.projects.length >= 4 && (
+        <div className="mt-12 flex flex-wrap justify-center gap-3">
+          {['Todos', ...tags].map((value) => (
+            <button
+              key={value}
+              onClick={() => setFilter(value)}
+              className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                filter === value
+                  ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
+              }`}
+            >
+              {value}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {data.projects.length === 0 ? (
+        <div className="mx-auto mt-12 max-w-xl rounded-2xl border border-slate-200 p-8 text-center dark:border-slate-800">
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+            Projetos em desenvolvimento
+          </h3>
+          <p className="mt-4 leading-7 text-slate-600 dark:text-slate-300">
+            Enquanto isso, você pode acompanhar meus estudos no GitHub.
+          </p>
+          {githubLink && (
+            <a
+              href={githubLink}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 font-bold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+            >
+              GitHub <ArrowUpRight size={18} />
+            </a>
+          )}
+        </div>
+      ) : (
+        <div className="mt-12 space-y-6">
+          {visibleProjects.map((project) => (
+            <article
+              key={project.title}
+              className="overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
+            >
+              <div className="flex flex-col md:flex-row">
+                <div className="flex items-center justify-center gap-4 bg-slate-100 p-4 dark:bg-slate-800 md:w-2/5">
+                  <img src={project.image} alt={project.title} className="h-64 w-full object-cover" />
+                  {project.imageMobile && (
+                    <img
+                      src={project.imageMobile}
+                      alt={`${project.title} em dispositivo móvel`}
+                      className="h-40 w-auto object-contain"
+                    />
+                  )}
+                </div>
+                <div className="p-6 md:w-3/5">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                      {project.title}
+                    </h3>
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-100">
+                      {project.status === 'concluido' ? 'Concluído' : 'Em andamento'}
+                    </span>
+                  </div>
+                  <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">
+                    {project.summary}
+                  </p>
+                  <h4 className="mt-5 font-bold text-slate-900 dark:text-white">Destaques</h4>
+                  <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-600 dark:text-slate-300">
+                    {project.highlights.map((highlight) => (
+                      <li key={highlight}>{highlight}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-100"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 font-bold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+                      >
+                        Ver ao vivo <ArrowUpRight size={17} />
+                      </a>
+                    )}
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 font-bold text-slate-900 transition hover:border-slate-900 dark:border-slate-700 dark:text-white dark:hover:border-slate-300"
+                    >
+                      Ver código <ArrowUpRight size={17} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+
+      <nav className="mt-16 flex flex-col items-center justify-between gap-6 md:flex-row">
+        <div className="flex-1">
+          {previous && (
+            <a
+              href={`#tecnologia/${previous.slug}`}
+              className="font-semibold text-slate-900 hover:underline dark:text-white"
+            >
+              ← {previous.name}
+            </a>
+          )}
+        </div>
+        <button
+          onClick={() => goToSection('linguagens')}
+          className="rounded-xl bg-slate-900 px-6 py-3 font-bold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+        >
+          Ver outras tecnologias
+        </button>
+        <div className="flex flex-1 justify-end">
+          {next && (
+            <a
+              href={`#tecnologia/${next.slug}`}
+              className="font-semibold text-slate-900 hover:underline dark:text-white"
+            >
+              {next.name} →
+            </a>
+          )}
+        </div>
+      </nav>
     </main>
   );
 }
 
 export default function App() {
-  const [page, setPage, hash] = usePage();
+  const [page, setPage, hash, techSlug] = usePage();
   const [dark, setDark] = useState(() => localStorage.getItem('darkMode') === 'ativado');
 
   useEffect(() => {
@@ -767,12 +949,14 @@ export default function App() {
     });
   }, [page, hash]);
 
+  const techPage = techSlug ? techPages.find((tech) => tech.slug === techSlug) : undefined;
+
   return (
     <div className="min-h-screen bg-white text-slate-900 transition-colors dark:bg-slate-950 dark:text-white">
       <Header dark={dark} setDark={setDark} />
       {page === 'home' && <Home setPage={setPage} />}
       {page === 'about' && <About />}
-      {page === 'htmlcss' && <HtmlCssProjects />}
+      {page === 'technology' && techPage && <TechPage data={techPage} />}
       <Footer />
     </div>
   );
