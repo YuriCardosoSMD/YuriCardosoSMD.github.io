@@ -1,0 +1,10 @@
+{
+  "name": "yuricardososmd.github.io",
+  "private": true,
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "latest"
+  }
+}
