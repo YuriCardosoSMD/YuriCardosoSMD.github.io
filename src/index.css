@@ -15,3 +15,8 @@ body {
   min-width: 320px;
   font-family: var(--font-sans);
 }
+
+:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
