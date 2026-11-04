@@ -25,6 +25,7 @@ import {
   Palette,
   Server,
   Sun,
+  Users,
   X,
   type LucideIcon,
 } from 'lucide-react';
@@ -762,7 +763,7 @@ function About() {
       <h1 className="sr-only">{t('about.title')}</h1>
       <SectionTitle title={t('about.title')} />
       <a
-        href="/curriculo-yuri-cardoso.pdf"
+        href="/Currículo Dev Yuri Cardoso.pdf"
         className="mx-auto mt-8 flex w-fit rounded-xl bg-slate-900 px-6 py-3 font-bold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
       >
         {t('resume.download')}
