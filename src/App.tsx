@@ -15,14 +15,17 @@ import {
   CalendarDays,
   Code2,
   Database,
+  ExternalLink,
   Github,
   Globe,
   GraduationCap,
+  Image,
   Linkedin,
   Mail,
   Menu,
   Moon,
   Palette,
+  Play,
   Server,
   Sun,
   Users,
@@ -33,24 +36,29 @@ import {
 type Page = 'home' | 'about' | 'technology';
 
 interface ProjectItem {
+  key: string;
   status: 'ativo' | 'pendente';
-  title: string;
+  title?: string;
   description?: string;
   technologies?: string[];
   icon: LucideIcon;
   image?: string;
   alt?: string;
   repo?: string;
+  demoUrl?: string;
   featured?: boolean;
 }
 
 interface Certificate {
+  key?: string;
+  group?: 'database' | 'networks' | 'ai' | 'support';
   name: string;
   provider: string;
   url?: string;
 }
 
 interface TechProject {
+  key: string;
   title: string;
   summary: string;
   highlights: string[];
@@ -71,8 +79,12 @@ interface TechPageData {
   projects: TechProject[];
   status: 'concluido' | 'em-breve';
   repoUrl?: string;
-  repoPlaceholder?: string;
 }
+
+const REPO_BASE =
+  'https://github.com/YuriCardosoSMD/YuriCardosoSMD.github.io/tree/main/public/demos';
+const demoUrl = (folder: string) => `/demos/${folder}/index.html`;
+const demoRepo = (folder: string) => `${REPO_BASE}/${folder}`;
 
 const socialLinks = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/yuri-da-silva-cardoso-515886215/', icon: Linkedin },
@@ -82,9 +94,9 @@ const socialLinks = [
 
 const mainProjects: ProjectItem[] = [
   {
+    key: 'stock',
     status: 'ativo',
-    title: 'Sistema de Estoque',
-    description: 'Aplicação para gerenciamento de estoque, com foco em uma rotina de back-end organizada e persistência de dados.',
+    description: 'project.stock.description',
     technologies: ['JavaScript', 'Node.js', 'Banco de dados'],
     icon: Database,
     image: '/assets/projeto-estoque.png',
@@ -93,9 +105,9 @@ const mainProjects: ProjectItem[] = [
     featured: true,
   },
   {
+    key: 'mandacaru',
     status: 'ativo',
-    title: 'Mandacaru Games',
-    description: 'Projeto de interface para jogos digitais.',
+    description: 'project.mandacaru.description',
     technologies: ['HTML', 'CSS', 'JavaScript'],
     icon: Globe,
     image: '/assets/projeto-mandacaru.png',
@@ -103,20 +115,38 @@ const mainProjects: ProjectItem[] = [
     repo: 'https://github.com/YuriCardosoSMD/DIGinterfacecompleta.git',
   },
   {
-    status: 'pendente',
-    title: 'Pendente',
-    icon: Server,
-  },
-  {
-    status: 'pendente',
-    title: 'Pendente',
+    key: 'memoryGame',
+    status: 'ativo',
+    description: 'project.memoryGame.description',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
     icon: Code2,
+    image: '/assets/site-jogo.png',
+    alt: 'project.memoryGame.alt',
+    repo: demoRepo('site-jogo'),
+    demoUrl: demoUrl('site-jogo'),
   },
   {
-    status: 'pendente',
-    title: 'Pendente',
+    key: 'quiz',
+    status: 'ativo',
+    description: 'project.quiz.description',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
     icon: Palette,
-  }
+    image: '/assets/site-quiz.png',
+    alt: 'project.quiz.alt',
+    repo: demoRepo('site-quiz'),
+    demoUrl: demoUrl('site-quiz'),
+  },
+  {
+    key: 'event',
+    status: 'ativo',
+    description: 'project.event.description',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
+    icon: Globe,
+    image: '/assets/site-evento.png',
+    alt: 'project.event.alt',
+    repo: demoRepo('site-evento'),
+    demoUrl: demoUrl('site-evento'),
+  },
 ];
 
 const techPages: TechPageData[] = [
@@ -124,23 +154,63 @@ const techPages: TechPageData[] = [
     slug: 'html-css',
     name: 'HTML + CSS',
     icon: '/assets/HTMLCSSIcon.png',
-    intro:
-      'Projetos que mostram como estruturo páginas com HTML semântico e construo layouts responsivos com CSS, sem frameworks.',
-    skills: ['HTML semântico', 'Flexbox', 'Media queries', 'Layout responsivo'],
+    intro: 'tech.html.intro',
+    skills: ['tech.html.skill.semantic', 'tech.html.skill.flex', 'tech.html.skill.media', 'tech.html.skill.responsive'],
     status: 'concluido',
     projects: [
       {
-        title: 'Cartão de Perfil Responsivo',
-        summary: 'Cartão de perfil que se adapta do celular ao desktop, à procura de experiência profissional.',
-        highlights: [
-          'Alinhamento e distribuição de elementos com Flexbox',
-          'Adaptação do layout a diferentes telas com media queries',
-          'Organização semântica do conteúdo',
-        ],
-        tags: ['Flexbox', 'Responsivo', 'Semântica'],
+        key: 'profileCard',
+        title: 'project.profileCard.title',
+        summary: 'tech.html.project.summary',
+        highlights: ['tech.html.highlight.flex', 'tech.html.highlight.media', 'tech.html.highlight.semantic'],
+        tags: ['tag.flex', 'tag.responsive', 'tag.semantic'],
         status: 'concluido',
         image: '/assets/Cartao_de_Perfil_Responsivo.png',
         repoUrl: 'https://github.com/YuriCardosoSMD/Cartao_de_Perfil_Responsivo_Treino-HTML_CSS',
+      },
+      {
+        key: 'landingpage',
+        title: 'project.landingpage.title',
+        summary: 'project.landingpage.description',
+        highlights: ['project.landingpage.highlight.1', 'project.landingpage.highlight.2', 'project.landingpage.highlight.3'],
+        tags: ['tag.scss', 'tag.animations', 'tag.responsive'],
+        status: 'concluido',
+        image: '/assets/atividade-landingpage.png',
+        liveUrl: demoUrl('atividade-landingpage'),
+        repoUrl: demoRepo('atividade-landingpage'),
+      },
+      {
+        key: 'googleClone',
+        title: 'project.googleClone.title',
+        summary: 'project.googleClone.description',
+        highlights: ['project.googleClone.highlight.1', 'project.googleClone.highlight.2', 'project.googleClone.highlight.3'],
+        tags: ['tag.dom', 'tag.events', 'tag.responsive'],
+        status: 'concluido',
+        image: '/assets/site-clonedesite.png',
+        liveUrl: demoUrl('site-clonedesite'),
+        repoUrl: demoRepo('site-clonedesite'),
+      },
+      {
+        key: 'photography',
+        title: 'project.photography.title',
+        summary: 'project.photography.description',
+        highlights: ['project.photography.highlight.1', 'project.photography.highlight.2', 'project.photography.highlight.3'],
+        tags: ['tag.html', 'tag.css', 'tag.responsive'],
+        status: 'concluido',
+        image: '/assets/site-fotografia.png',
+        liveUrl: demoUrl('site-fotografia'),
+        repoUrl: demoRepo('site-fotografia'),
+      },
+      {
+        key: 'blog',
+        title: 'project.blog.title',
+        summary: 'project.blog.description',
+        highlights: ['project.blog.highlight.1', 'project.blog.highlight.2', 'project.blog.highlight.3'],
+        tags: ['tag.html', 'tag.css', 'tag.darkMode'],
+        status: 'concluido',
+        image: '/assets/site-blog.png',
+        liveUrl: demoUrl('site-blog'),
+        repoUrl: demoRepo('site-blog'),
       },
     ],
   },
@@ -148,11 +218,44 @@ const techPages: TechPageData[] = [
     slug: 'typescript-javascript',
     name: 'TypeScript + JavaScript',
     icon: '/assets/JsTsIcon.png',
-    intro: '',
-    skills: [],
-    projects: [],
-    status: 'em-breve',
-    repoPlaceholder: 'TODO: adicionar link do repositório específico de TypeScript e JavaScript',
+    intro: 'tech.ts.intro',
+    skills: ['tech.ts.skill.dom', 'tech.ts.skill.events', 'tech.ts.skill.api', 'tech.ts.skill.storage'],
+    projects: [
+      {
+        key: 'currency',
+        title: 'project.currency.title',
+        summary: 'project.currency.description',
+        highlights: ['project.currency.highlight.1', 'project.currency.highlight.2', 'project.currency.highlight.3'],
+        tags: ['tag.dom', 'tag.api', 'tag.async'],
+        status: 'concluido',
+        image: '/assets/conversor-de-moedas.png',
+        liveUrl: demoUrl('conversor-de-moedas'),
+        repoUrl: demoRepo('conversor-de-moedas'),
+      },
+      {
+        key: 'weather',
+        title: 'project.weather.title',
+        summary: 'project.weather.description',
+        highlights: ['project.weather.highlight.1', 'project.weather.highlight.2', 'project.weather.highlight.3'],
+        tags: ['tag.api', 'tag.async', 'tag.dom'],
+        status: 'concluido',
+        image: '/assets/site-climetempoapi.png',
+        liveUrl: demoUrl('site-climetempoapi'),
+        repoUrl: demoRepo('site-climetempoapi'),
+      },
+      {
+        key: 'dashboard',
+        title: 'project.dashboard.title',
+        summary: 'project.dashboard.description',
+        highlights: ['project.dashboard.highlight.1', 'project.dashboard.highlight.2', 'project.dashboard.highlight.3'],
+        tags: ['tag.dom', 'tag.responsive', 'tag.js'],
+        status: 'concluido',
+        image: '/assets/site-dashboard.png',
+        liveUrl: demoUrl('site-dashboard'),
+        repoUrl: demoRepo('site-dashboard'),
+      },
+    ],
+    status: 'concluido',
   },
   {
     slug: 'react',
@@ -235,58 +338,21 @@ const education = [
 ];
 
 const certificates: Certificate[] = [
-  { name: 'Banco de Dados Oracle Completo 2026: SQL + PLSQL + Modelagem', provider: 'Udemy' },
-  { name: 'Aprenda tudo sobre o Linux! Completo e atualizado v2026!', provider: 'Udemy' },
-  { name: 'Criando Chatbots com a plataforma BLIP', provider: 'Udemy' },
-  { name: 'Curso de IA Generativa Online - 3.0', provider: 'Geração Tech 3.0 IEL Ceará' },
-  {
-    name: 'Biblioteca de boas práticas de gestão de TI (GSTI/ITSM) v3 (ITIL v3)',
-    provider: 'Certificação / Capacitação',
-  },
-  {
-    name: 'Estrutura e Funcionamento das Redes de Computadores',
-    provider: 'Coursera Google + CIEE',
-  },
-  { name: 'Fundamentos do Suporte Técnico', provider: 'Coursera Google + CIEE' },
-  {
-    name: 'Programa Jovem Aprendiz CIEE',
-    provider: 'Centro de Integração Empresa-Escola - CIEE',
-  },
+  { key: 'oracle', group: 'database', name: 'certificate.oracle.name', provider: 'Udemy' },
+  { key: 'linux', group: 'support', name: 'certificate.linux.name', provider: 'Udemy' },
+  { key: 'blip', group: 'ai', name: 'certificate.blip.name', provider: 'Udemy' },
+  { key: 'genai', group: 'ai', name: 'certificate.genai.name', provider: 'Geração Tech 3.0 IEL Ceará' },
+  { key: 'itil', group: 'support', name: 'certificate.itil.name', provider: 'certificate.itil.provider' },
+  { key: 'networks', group: 'networks', name: 'certificate.networks.name', provider: 'Coursera Google + CIEE' },
+  { key: 'support', group: 'support', name: 'certificate.support.name', provider: 'Coursera Google + CIEE' },
+  { key: 'apprentice', group: 'support', name: 'certificate.apprentice.name', provider: 'Centro de Integração Empresa-Escola - CIEE' },
 ];
 
 const certificateGroups = [
-  {
-    key: 'database',
-    title: 'Banco de Dados',
-    items: certificates.filter((certificate) => certificate.name.startsWith('Banco de Dados')),
-  },
-  {
-    key: 'networks',
-    title: 'Redes',
-    items: certificates.filter((certificate) =>
-      certificate.name.startsWith('Estrutura e Funcionamento das Redes'),
-    ),
-  },
-  {
-    key: 'ai',
-    title: 'IA',
-    items: certificates.filter(
-      (certificate) =>
-        certificate.name.startsWith('Criando Chatbots') ||
-        certificate.name.startsWith('Curso de IA Generativa'),
-    ),
-  },
-  {
-    key: 'support',
-    title: 'Suporte e infraestrutura',
-    items: certificates.filter(
-      (certificate) =>
-        certificate.name.startsWith('Aprenda tudo sobre o Linux') ||
-        certificate.name.startsWith('Biblioteca de boas práticas') ||
-        certificate.name.startsWith('Fundamentos do Suporte') ||
-        certificate.name.startsWith('Programa Jovem Aprendiz'),
-    ),
-  },
+  ...(['database', 'networks', 'ai', 'support'] as const).map((key) => ({
+    key,
+    items: certificates.filter((certificate) => certificate.group === key),
+  })),
 ];
 
 const events: Certificate[] = [
@@ -360,6 +426,27 @@ function SectionTitle({ title }: { title: string }) {
   );
 }
 
+function ProjectImage({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div className={`flex items-center justify-center bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-400 ${className}`}>
+        <Image size={40} aria-hidden="true" />
+        <span className="sr-only">{alt}</span>
+      </div>
+    );
+  }
+  return <img src={src} alt={alt} onError={() => setFailed(true)} className={className} />;
+}
+
 function Header({
   dark,
   setDark,
@@ -382,11 +469,11 @@ function Header({
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90">
+    <header className="sticky top-0 z-50 border-b border-slate-300/70 bg-[#e9edf2]/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <button
           onClick={() => navigate('home')}
-          className="text-xl font-black tracking-tight text-slate-900 dark:text-white"
+          className="cursor-pointer rounded-lg text-xl font-black tracking-tight text-slate-900 transition hover:text-slate-600 focus-visible:outline focus-visible:outline-2 dark:text-white dark:hover:text-slate-300"
         >
           Yuri Cardoso
         </button>
@@ -395,7 +482,7 @@ function Header({
           aria-label={t('nav.main')}
           className={`${
             menuOpen ? 'flex' : 'hidden'
-          } absolute left-0 top-full w-full flex-col gap-2 border-b border-slate-200 bg-white p-6 md:static md:flex md:w-auto md:flex-row md:border-0 md:bg-transparent md:p-0 dark:border-slate-800 dark:bg-slate-950 md:dark:bg-transparent`}
+          } absolute left-0 top-full w-full flex-col gap-2 border-b border-slate-300 bg-[#e9edf2] p-6 md:static md:flex md:w-auto md:flex-row md:border-0 md:bg-transparent md:p-0 dark:border-slate-800 dark:bg-slate-950 md:dark:bg-transparent`}
         >
           {links.map(([target, label]) => (
             <button
@@ -425,7 +512,7 @@ function Header({
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
-          <div className="flex items-center rounded-lg border border-slate-200 p-1 dark:border-slate-700" aria-label={t('language.selector')}>
+          <div className="flex items-center rounded-lg border border-slate-300 p-1 dark:border-slate-700" aria-label={t('language.selector')}>
             {supportedLanguages.map((option) => (
               <button
                 key={option}
@@ -452,7 +539,7 @@ function Header({
 function Footer() {
   const { t } = useLanguage();
   return (
-    <footer className="border-t border-slate-200 bg-white px-6 py-12 dark:border-slate-800 dark:bg-slate-950">
+    <footer className="border-t border-slate-300 bg-[#e9edf2] px-6 py-12 dark:border-slate-800 dark:bg-slate-950">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-center">
         <div className="flex gap-4">
           {socialLinks.map(({ label, href, icon: Icon }) => (
@@ -486,7 +573,7 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
     <main>
       <section
         id="home"
-        className="mx-auto flex min-h-[calc(100vh-73px)] max-w-6xl scroll-mt-24 flex-col justify-center px-6 py-24"
+        className="mx-auto grid min-h-[calc(100vh-73px)] max-w-6xl grid-cols-1 items-center gap-10 scroll-mt-24 px-6 py-24 lg:grid-cols-2"
       >
         <div className="max-w-3xl">
           <h1 className="text-5xl font-black tracking-tight text-slate-900 sm:text-7xl dark:text-white">
@@ -504,9 +591,10 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
             </a>
           </div>
 
-          <div
+        </div>
+        <div
             aria-hidden="true"
-            className="mt-14 max-w-xl rounded-3xl border border-slate-200 bg-slate-50 p-6 font-mono text-sm shadow-sm dark:border-slate-800 dark:bg-slate-900"
+            className="w-full max-w-xl justify-self-center rounded-3xl border border-slate-300 bg-[#f3f5f8] p-8 font-mono text-sm shadow-sm dark:border-slate-800 dark:bg-slate-900"
           >
             <div className="mb-6 flex gap-2">
               <span className="h-3 w-3 rounded-full bg-slate-300 dark:bg-slate-600" />
@@ -518,9 +606,8 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
             <p className="pl-4 text-slate-700 dark:text-slate-200">dados: 'SQL',</p>
             <p className="text-slate-500 dark:text-slate-400">{'}'};</p>
           </div>
-        </div>
 
-        <div className="mt-12 flex gap-4">
+        <div className="flex gap-4 lg:col-start-1 lg:row-start-2">
           {socialLinks.map(({ label, href, icon: Icon }) => (
             <a
               key={label}
@@ -529,7 +616,7 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
               rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
               aria-label={label === 'E-mail' ? t('social.email') : label}
               title={label === 'E-mail' ? t('social.email') : label}
-              className="text-slate-500 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+              className="cursor-pointer rounded-lg text-slate-500 transition hover:text-slate-900 focus-visible:outline focus-visible:outline-2 dark:text-slate-400 dark:hover:text-white"
             >
               <Icon />
             </a>
@@ -539,7 +626,7 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
 
       <section
         id="resumo"
-        className="min-h-[calc(100vh-73px)] scroll-mt-24 bg-slate-50 px-6 py-24 dark:bg-slate-900/50"
+        className="min-h-[calc(100vh-73px)] scroll-mt-24 bg-[#dde3ea] px-6 py-24 dark:bg-slate-900/50"
       >
         <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
           <div>
@@ -595,29 +682,18 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
         {featuredProject && (
           <article className="mt-12 overflow-hidden rounded-2xl border-2 border-slate-900 bg-slate-900 text-white shadow-lg dark:border-slate-200 dark:bg-slate-100 dark:text-slate-900">
             <div className="grid items-center md:grid-cols-2">
-              <img
+              <ProjectImage
                 src={featuredProject.image ?? ''}
-                alt={
-                  featuredProject.title === 'Sistema de Estoque'
-                    ? t('alt.stock')
-                    : featuredProject.alt ?? featuredProject.title
-                }
-                width={800}
-                height={450}
-                loading="lazy"
+                alt={featuredProject.key === 'stock' ? t('alt.stock') : t((featuredProject.alt ?? 'alt.project') as TranslationKey)}
                 className="h-full min-h-64 w-full object-cover"
               />
               <div className="p-8">
                 <p className="text-sm font-bold uppercase tracking-widest opacity-70">{t('projects.backend')}</p>
                 <h3 className="mt-3 text-3xl font-black">
-                  {featuredProject.title === 'Sistema de Estoque'
-                    ? t('project.stock.title')
-                    : featuredProject.title}
+                  {t(`project.${featuredProject.key}.title` as TranslationKey)}
                 </h3>
                 <p className="mt-4 leading-7 opacity-80">
-                  {featuredProject.title === 'Sistema de Estoque'
-                    ? t('project.stock.description')
-                    : featuredProject.description}
+                  {t((featuredProject.description ?? 'projects.description') as TranslationKey)}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {featuredProject.technologies?.map((technology) => (
@@ -640,26 +716,19 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
         )}
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
-          {secondaryProjects.map(({ status, title, description, technologies, icon: Icon, image, alt, repo }, index) => (
+          {secondaryProjects.map(({ key, status, description, technologies, icon: Icon, image, alt, repo, demoUrl }, index) => (
             <article
-              key={`${status}-${title}-${index}`}
-              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-slate-900 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-600"
+              key={`${status}-${key}-${index}`}
+              className="group overflow-hidden rounded-2xl border border-slate-300 bg-[#f3f5f8] shadow-sm transition hover:-translate-y-1 motion-reduce:hover:translate-y-0 hover:border-slate-900 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-600"
             >
-              {status === 'pendente' ? (
-                <div className="flex h-48 items-center justify-center bg-slate-100 dark:bg-slate-800">
-                  <Icon size={48} className="text-slate-400 transition group-hover:scale-110 dark:text-slate-500" />
-                </div>
-              ) : image ? (
-                <img
+              {image ? (
+                <ProjectImage
                   src={image}
-                  alt={title === 'Mandacaru Games' ? t('alt.mandacaru') : alt ?? t('alt.project')}
-                  width={800}
-                  height={450}
-                  loading="lazy"
+                  alt={key === 'mandacaru' ? t('alt.mandacaru') : t((alt ?? 'alt.project') as TranslationKey)}
                   className="h-48 w-full object-cover"
                 />
               ) : (
-                <div className="flex h-48 items-center justify-center bg-slate-100 dark:bg-slate-800">
+                <div className="flex h-48 items-center justify-center bg-[#f3f5f8] dark:bg-slate-800">
                   <Icon
                     size={48}
                     className="text-slate-900 transition group-hover:scale-110 dark:text-white"
@@ -669,14 +738,10 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
 
               <div className="p-6">
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                  {title === 'Mandacaru Games' ? t('project.mandacaru.title') : title}
+                  {t(`project.${key}.title` as TranslationKey)}
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                  {status === 'pendente'
-                    ? t('projects.comingSoon')
-                    : title === 'Mandacaru Games'
-                      ? t('project.mandacaru.description')
-                      : description}
+                  {t((description ?? 'projects.comingSoon') as TranslationKey)}
                 </p>
                 {technologies && <div className="mt-4 flex flex-wrap gap-2">
                   {technologies.map((technology) => (
@@ -689,14 +754,16 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
                   ))}
                 </div>}
                 {status === 'ativo' && repo && (
-                  <a
-                    href={repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-flex items-center gap-2 font-semibold text-slate-900 hover:underline dark:text-white"
-                  >
-                    {t('projects.github')} <ArrowUpRight size={16} />
-                  </a>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    {demoUrl && (
+                      <a href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`${t(`project.${key}.title` as TranslationKey)} - ${t('projects.demo')}`} className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 font-semibold text-white transition hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200">
+                        {t('projects.demo')} <Play size={16} />
+                      </a>
+                    )}
+                    <a href={repo} target="_blank" rel="noopener noreferrer" aria-label={`${t(`project.${key}.title` as TranslationKey)} - ${t('projects.code')}`} className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-300 px-4 py-2 font-semibold text-slate-900 transition hover:border-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:border-slate-700 dark:text-white dark:hover:border-slate-300">
+                      {demoUrl ? t('projects.code') : t('projects.repository')} <Code2 size={16} />
+                    </a>
+                  </div>
                 )}
               </div>
             </article>
@@ -706,7 +773,7 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
 
       <section
         id="linguagens"
-        className="min-h-[calc(100vh-73px)] scroll-mt-24 bg-slate-50 px-6 py-24 dark:bg-slate-900/50"
+        className="min-h-[calc(100vh-73px)] scroll-mt-24 bg-[#dde3ea] px-6 py-24 dark:bg-slate-900/50"
       >
         <div className="mx-auto max-w-6xl">
           <SectionTitle title={t('nav.technologies')} />
@@ -721,13 +788,13 @@ function Home({ setPage }: { setPage: (page: Page) => void }) {
                 onClick={() => {
                   window.location.hash = `tecnologia/${tech.slug}`;
                 }}
-                className={`group flex h-full flex-col overflow-hidden rounded-2xl border bg-white text-left shadow-sm transition hover:-translate-y-1 hover:border-slate-900 hover:shadow-md dark:bg-slate-950 dark:hover:border-slate-600 ${
+                className={`group flex h-full flex-col overflow-hidden rounded-2xl border bg-[#f3f5f8] text-left shadow-sm transition hover:-translate-y-1 motion-reduce:hover:translate-y-0 hover:border-slate-900 hover:shadow-md dark:bg-slate-950 dark:hover:border-slate-600 ${
                   tech.status === 'em-breve'
-                    ? 'border-slate-200/70 opacity-75 dark:border-slate-800/70'
-                    : 'border-slate-200 dark:border-slate-800'
+                    ? 'border-slate-300/70 opacity-75 dark:border-slate-800/70'
+                    : 'border-slate-300 dark:border-slate-800'
                 }`}
               >
-                <div className="flex h-48 items-center justify-center bg-slate-100 dark:bg-slate-800">
+                <div className="flex h-48 items-center justify-center bg-[#f3f5f8] dark:bg-slate-800">
                   <img
                     src={tech.icon}
                     alt={tech.name}
@@ -763,14 +830,15 @@ function About() {
       <h1 className="sr-only">{t('about.title')}</h1>
       <SectionTitle title={t('about.title')} />
       <a
-        href="/Currículo Dev Yuri Cardoso.pdf"
-        className="mx-auto mt-8 flex w-fit rounded-xl bg-slate-900 px-6 py-3 font-bold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+        href="/curriculo-yuri-cardoso.pdf"
+        download
+        className="mx-auto mt-8 flex w-fit cursor-pointer rounded-xl bg-slate-900 px-6 py-3 font-bold text-white transition hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
       >
         {t('resume.download')}
       </a>
 
       <div className="mt-12 grid gap-8 md:grid-cols-2">
-        <article className="rounded-2xl border border-slate-200 p-8 dark:border-slate-800 md:col-span-2">
+        <article className="rounded-2xl border border-slate-300 bg-[#f3f5f8] p-8 dark:border-slate-800 dark:bg-slate-900 md:col-span-2">
           <h3 className="flex items-center gap-3 text-2xl font-bold text-slate-900 dark:text-white">
             <Users /> {t('about.profile')}
           </h3>
@@ -779,7 +847,7 @@ function About() {
           </p>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 p-8 dark:border-slate-800">
+        <article className="rounded-2xl border border-slate-300 bg-[#f3f5f8] p-8 dark:border-slate-800 dark:bg-slate-900">
           <h3 className="flex items-center gap-3 text-2xl font-bold text-slate-900 dark:text-white">
             <Globe /> {t('about.languages')}
           </h3>
@@ -796,7 +864,7 @@ function About() {
           </ul>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 p-8 dark:border-slate-800">
+        <article className="rounded-2xl border border-slate-300 bg-[#f3f5f8] p-8 dark:border-slate-800 dark:bg-slate-900">
           <h3 className="flex items-center gap-3 text-2xl font-bold text-slate-900 dark:text-white">
             <Mail /> {t('about.contact')}
           </h3>
@@ -813,13 +881,13 @@ function About() {
 
       <section className="mt-24">
         <SectionTitle title={t('about.experiences')} />
-        <div className="relative mt-10 space-y-8 border-l-2 border-slate-200 pl-6 dark:border-slate-800 sm:pl-10">
+        <div className="relative mt-10 space-y-8 border-l-2 border-slate-300 pl-6 dark:border-slate-800 sm:pl-10">
           {experiences.map(({ key, company }) => (
             <article
               key={key}
-              className="relative rounded-2xl border border-slate-200 p-6 dark:border-slate-800 sm:p-8"
+              className="relative rounded-2xl border border-slate-300 bg-[#f3f5f8] p-6 dark:border-slate-800 dark:bg-slate-900 sm:p-8"
             >
-              <span className="absolute -left-[2.05rem] top-8 h-4 w-4 rounded-full border-4 border-white bg-slate-900 dark:-left-[2.55rem] dark:border-slate-950 dark:bg-white" />
+              <span className="absolute -left-[2.05rem] top-8 h-4 w-4 rounded-full border-4 border-[#e9edf2] bg-slate-900 dark:-left-[2.55rem] dark:border-slate-950 dark:bg-white" />
               <div className="flex flex-col justify-between gap-3 sm:flex-row">
                 <div>
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white">
@@ -845,7 +913,7 @@ function About() {
           {education.map(({ key, institution }) => (
             <article
               key={key}
-              className="rounded-2xl border border-slate-200 p-8 dark:border-slate-800"
+              className="rounded-2xl border border-slate-300 bg-[#f3f5f8] p-8 dark:border-slate-800 dark:bg-slate-900"
             >
               <GraduationCap className="text-slate-900 dark:text-white" />
               <span className="mt-4 inline-block text-sm font-semibold text-slate-700 dark:text-slate-300">
@@ -870,13 +938,15 @@ function About() {
                 {t(`certificate.${key}` as TranslationKey)}
               </h4>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                {items.map(({ name, provider, url }) => {
+                {items.map(({ key, name, provider, url }) => {
                   const content = (
                     <>
                       <Award className="shrink-0 text-slate-900 dark:text-white" />
                       <div>
-                        <h5 className="font-semibold text-slate-900 dark:text-white">{name}</h5>
-                        <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">{provider}</p>
+                        <h5 className="font-semibold text-slate-900 dark:text-white">{key ? t(name as TranslationKey) : name}</h5>
+                        <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">
+                          {key && provider.startsWith('certificate.') ? t(provider as TranslationKey) : provider}
+                        </p>
                       </div>
                     </>
                   );
@@ -887,14 +957,14 @@ function About() {
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex gap-4 rounded-xl border border-slate-200 p-5 transition hover:border-slate-900 dark:border-slate-800 dark:hover:border-slate-600"
+                      className="flex gap-4 rounded-xl border border-slate-300 bg-[#f3f5f8] p-5 transition hover:border-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-600"
                     >
                       {content}
                     </a>
                   ) : (
                     <article
                       key={name}
-                      className="flex gap-4 rounded-xl border border-slate-200 p-5 dark:border-slate-800"
+                      className="flex gap-4 rounded-xl border border-slate-300 bg-[#f3f5f8] p-5 dark:border-slate-800 dark:bg-slate-900"
                     >
                       {content}
                     </article>
@@ -925,14 +995,14 @@ function About() {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex gap-4 rounded-xl border border-slate-200 p-5 transition hover:border-slate-900 dark:border-slate-800 dark:hover:border-slate-600"
+                className="flex gap-4 rounded-xl border border-slate-300 bg-[#f3f5f8] p-5 transition hover:border-slate-900 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-600"
               >
                 {content}
               </a>
             ) : (
               <article
                 key={name}
-                className="flex gap-4 rounded-xl border border-slate-200 p-5 dark:border-slate-800"
+                className="flex gap-4 rounded-xl border border-slate-300 bg-[#f3f5f8] p-5 dark:border-slate-800 dark:bg-slate-900"
               >
                 {content}
               </article>
@@ -953,10 +1023,10 @@ function About() {
 
 function TechPage({ data }: { data: TechPageData }) {
   const { t } = useLanguage();
-  const [filter, setFilter] = useState('Todos');
+  const [filter, setFilter] = useState('all');
   const tags = Array.from(new Set(data.projects.flatMap((project) => project.tags)));
   const visibleProjects =
-    filter === 'Todos'
+    filter === 'all'
       ? data.projects
       : data.projects.filter((project) => project.tags.includes(filter));
   const currentIndex = techPages.findIndex((tech) => tech.slug === data.slug);
@@ -964,7 +1034,7 @@ function TechPage({ data }: { data: TechPageData }) {
   const next = currentIndex < techPages.length - 1 ? techPages[currentIndex + 1] : undefined;
 
   useEffect(() => {
-    setFilter('Todos');
+    setFilter('all');
   }, [data.slug]);
 
   return (
@@ -977,7 +1047,7 @@ function TechPage({ data }: { data: TechPageData }) {
         </div>
         {data.intro && (
           <p className="mx-auto mt-6 max-w-2xl leading-8 text-slate-600 dark:text-slate-300">
-            {data.slug === 'html-css' ? t('tech.html.intro') : data.intro}
+            {t(data.intro as TranslationKey)}
           </p>
         )}
       </div>
@@ -991,16 +1061,7 @@ function TechPage({ data }: { data: TechPageData }) {
                 key={skill}
                 className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-100"
               >
-                {data.slug === 'html-css'
-                  ? t(
-                      ({
-                        'HTML semântico': 'tech.html.skill.semantic',
-                        Flexbox: 'tech.html.skill.flex',
-                        'Media queries': 'tech.html.skill.media',
-                        'Layout responsivo': 'tech.html.skill.responsive',
-                      }[skill] ?? 'tech.html.skill.semantic') as TranslationKey,
-                    )
-                  : skill}
+                {t(skill as TranslationKey)}
               </span>
             ))}
           </div>
@@ -1009,7 +1070,7 @@ function TechPage({ data }: { data: TechPageData }) {
 
       {data.projects.length >= 4 && (
         <div className="mt-12 flex flex-wrap justify-center gap-3">
-          {['Todos', ...tags].map((value) => (
+          {['all', ...tags].map((value) => (
             <button
               key={value}
               onClick={() => setFilter(value)}
@@ -1019,14 +1080,14 @@ function TechPage({ data }: { data: TechPageData }) {
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
               }`}
             >
-              {value}
+              {value === 'all' ? t('tech.filter.all') : t(value as TranslationKey)}
             </button>
           ))}
         </div>
       )}
 
       {data.projects.length === 0 ? (
-        <div className="mx-auto mt-12 max-w-xl rounded-2xl border border-slate-200 p-8 text-center dark:border-slate-800">
+        <div className="mx-auto mt-12 max-w-xl rounded-2xl border border-slate-300 bg-[#f3f5f8] p-8 text-center dark:border-slate-800 dark:bg-slate-900">
           <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
             {t('tech.inProgressTitle')}
           </h3>
@@ -1043,11 +1104,14 @@ function TechPage({ data }: { data: TechPageData }) {
               {t('projects.repository')} <ArrowUpRight size={18} />
             </a>
           ) : (
-            <p className="mt-6 text-sm font-semibold text-slate-500 dark:text-slate-400">
-              {data.slug === 'typescript-javascript'
-                ? t('tech.ts.repositoryPlaceholder')
-                : t('tech.repositoryPlaceholder')}
-            </p>
+            <a
+              href="https://github.com/YuriCardosoSMD?tab=repositories"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl border border-slate-300 px-6 py-3 font-bold text-slate-900 transition hover:border-slate-900 dark:border-slate-700 dark:text-white dark:hover:border-slate-300"
+            >
+              {t('tech.github')} <Github size={18} />
+            </a>
           )}
         </div>
       ) : (
@@ -1055,25 +1119,19 @@ function TechPage({ data }: { data: TechPageData }) {
           {visibleProjects.map((project) => (
             <article
               key={project.title}
-              className="overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
+              className="overflow-hidden rounded-2xl border border-slate-300 bg-[#f3f5f8] dark:border-slate-800 dark:bg-slate-900"
             >
               <div className="flex flex-col md:flex-row">
-                <div className="flex items-center justify-center gap-4 bg-slate-100 p-4 dark:bg-slate-800 md:w-2/5">
-                  <img
+                <div className="flex items-center justify-center gap-4 bg-[#f3f5f8] p-4 dark:bg-slate-800 md:w-2/5">
+                  <ProjectImage
                     src={project.image}
-                    alt={project.title}
-                    width={800}
-                    height={450}
-                    loading="lazy"
+                    alt={t(`project.${project.key}.title` as TranslationKey)}
                     className="h-64 w-full object-cover"
                   />
                   {project.imageMobile && (
-                    <img
+                    <ProjectImage
                       src={project.imageMobile}
-                      width={320}
-                      height={568}
-                      loading="lazy"
-                      alt={`${project.title} mobile view`}
+                      alt={`${t(`project.${project.key}.title` as TranslationKey)} mobile view`}
                       className="h-40 w-auto object-contain"
                     />
                   )}
@@ -1081,16 +1139,16 @@ function TechPage({ data }: { data: TechPageData }) {
                 <div className="p-6 md:w-3/5">
                   <div className="flex flex-wrap items-center gap-3">
                     <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-                      {project.title}
+                      {t(`project.${project.key}.title` as TranslationKey)}
                     </h3>
-                    <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-100">
+                    <span className="rounded-full bg-[#f3f5f8] px-3 py-1 text-sm font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-100">
                       {project.status === 'concluido'
                         ? t('status.completed')
                         : t('status.inProgress')}
                     </span>
                   </div>
                   <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">
-                    {data.slug === 'html-css' ? t('tech.html.project.summary') : project.summary}
+                    {t(project.summary as TranslationKey)}
                   </p>
                   <h4 className="mt-5 font-bold text-slate-900 dark:text-white">
                     {t('tech.highlights')}
@@ -1098,17 +1156,7 @@ function TechPage({ data }: { data: TechPageData }) {
                   <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-600 dark:text-slate-300">
                     {project.highlights.map((highlight) => (
                       <li key={highlight}>
-                        {data.slug === 'html-css'
-                          ? t(
-                              ({
-                                'Alinhamento e distribuição de elementos com Flexbox':
-                                  'tech.html.highlight.flex',
-                                'Adaptação do layout a diferentes telas com media queries':
-                                  'tech.html.highlight.media',
-                                'Organização semântica do conteúdo': 'tech.html.highlight.semantic',
-                              }[highlight] ?? 'tech.html.highlight.semantic') as TranslationKey,
-                            )
-                          : highlight}
+                        {t(highlight as TranslationKey)}
                       </li>
                     ))}
                   </ul>
@@ -1116,9 +1164,9 @@ function TechPage({ data }: { data: TechPageData }) {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-100"
+                        className="rounded-full bg-[#f3f5f8] px-3 py-1 text-sm font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-100"
                       >
-                        {tag}
+                        {t(tag as TranslationKey)}
                       </span>
                     ))}
                   </div>
@@ -1130,7 +1178,7 @@ function TechPage({ data }: { data: TechPageData }) {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 font-bold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
                       >
-                        {t('projects.github')} <ArrowUpRight size={17} />
+                        {t('projects.demo')} <Play size={17} />
                       </a>
                     )}
                     <a
@@ -1139,7 +1187,7 @@ function TechPage({ data }: { data: TechPageData }) {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 font-bold text-slate-900 transition hover:border-slate-900 dark:border-slate-700 dark:text-white dark:hover:border-slate-300"
                     >
-                      {t('projects.repository')} <ArrowUpRight size={17} />
+                      {project.liveUrl ? t('projects.code') : t('projects.repository')} <Code2 size={17} />
                     </a>
                   </div>
                 </div>
@@ -1154,7 +1202,7 @@ function TechPage({ data }: { data: TechPageData }) {
           {previous && (
             <a
               href={`#tecnologia/${previous.slug}`}
-              className="font-semibold text-slate-900 hover:underline dark:text-white"
+              className="cursor-pointer rounded font-semibold text-slate-900 underline transition hover:text-slate-500 focus-visible:outline focus-visible:outline-2 dark:text-white"
             >
               {t('tech.previous')}
             </a>
@@ -1170,7 +1218,7 @@ function TechPage({ data }: { data: TechPageData }) {
           {next && (
             <a
               href={`#tecnologia/${next.slug}`}
-              className="font-semibold text-slate-900 hover:underline dark:text-white"
+              className="cursor-pointer rounded font-semibold text-slate-900 underline transition hover:text-slate-500 focus-visible:outline focus-visible:outline-2 dark:text-white"
             >
               {t('tech.next')}
             </a>
@@ -1243,7 +1291,7 @@ export default function App() {
 
   return (
     <LanguageProvider language={language} setLanguage={setLanguage}>
-      <div className="min-h-screen bg-white text-slate-900 transition-colors dark:bg-slate-950 dark:text-white">
+      <div className="min-h-screen bg-[#e9edf2] text-slate-900 transition-colors dark:bg-slate-950 dark:text-white">
         {appContent}
       </div>
     </LanguageProvider>
